@@ -1,407 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="30" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dhairya Gupta 🚀</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Righteous&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --sky: #0f172a;
-      --accent: #38bdf8;
-      --gold: #fbbf24;
-      --pink: #f472b6;
-      --green: #34d399;
-      --purple: #a78bfa;
-      --card-bg: rgba(255,255,255,0.05);
-      --border: rgba(255,255,255,0.1);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: var(--sky);
-      color: #e2e8f0;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 5% 8%, rgba(255,255,255,0.9) 0%, transparent 100%),
-        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 15% 40%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 25%, rgba(255,255,255,0.9) 0%, transparent 100%),
-        radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 30% 90%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 35% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 40% 30%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 42% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 48% 75%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 52% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 58% 45%, rgba(255,255,255,0.9) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 10%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 63% 65%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 68% 35%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.9) 0%, transparent 100%),
-        radial-gradient(1px 1px at 72% 85%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 75% 50%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 80% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 83% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 85% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 88% 30%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 90% 75%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 92% 5%, rgba(255,255,255,0.9) 0%, transparent 100%),
-        radial-gradient(1px 1px at 94% 50%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 97% 88%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 35% 45%, rgba(255,255,255,0.3) 0%, transparent 100%);
-      pointer-events: none; z-index: 0;
-    }
-
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 7% 33%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1px 1px at 13% 55%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 22% 18%, rgba(200,220,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 33% 72%, rgba(255,255,255,0.5) 0%, transparent 100%),
-        radial-gradient(1px 1px at 44% 88%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 50% 38%, rgba(200,220,255,0.5) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 61% 92%, rgba(255,255,255,0.8) 0%, transparent 100%),
-        radial-gradient(1px 1px at 66% 48%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 77% 8%, rgba(200,220,255,0.9) 0%, transparent 100%),
-        radial-gradient(1px 1px at 82% 62%, rgba(255,255,255,0.6) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 89% 42%, rgba(255,255,255,0.7) 0%, transparent 100%),
-        radial-gradient(1px 1px at 95% 22%, rgba(200,220,255,0.5) 0%, transparent 100%);
-      pointer-events: none; z-index: 0;
-      animation: twinkle 4s ease-in-out infinite alternate;
-    }
-    @keyframes twinkle {
-      from { opacity: 0.4; }
-      to   { opacity: 1; }
-    }
-
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 2rem;
-      backdrop-filter: blur(12px);
-      background: rgba(15,23,42,0.8);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: 'Righteous', cursive; font-size: 1.5rem; color: var(--accent); text-decoration: none; }
-    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
-    .nav-links a { color: #94a3b8; text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      position: relative; z-index: 1;
-    }
-
-    .avatar-ring {
-      width: 160px; height: 160px; border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, var(--accent), var(--purple), var(--pink));
-      margin-bottom: 1.5rem;
-      animation: spinRing 6s linear infinite;
-    }
-    @keyframes spinRing {
-      0%   { background: linear-gradient(0deg, var(--accent), var(--purple), var(--pink)); }
-      100% { background: linear-gradient(360deg, var(--accent), var(--purple), var(--pink)); }
-    }
-    .avatar-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--sky); }
-
-    .badge {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      background: rgba(251,191,36,0.15); border: 1px solid var(--gold); color: var(--gold);
-      font-size: 0.8rem; font-weight: 800; padding: 0.3rem 0.9rem;
-      border-radius: 999px; margin-bottom: 1rem; letter-spacing: 0.05em;
-      animation: fadeDown 0.6s ease both;
-    }
-
-    h1 {
-      font-family: 'Righteous', cursive;
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      line-height: 1.1;
-      background: linear-gradient(65deg, #00fff7, #a78bfa, #f472b6, #fbbf24);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 2px #00fff7) drop-shadow(0 0 4px #a78bfa);
-      animation: fadeUp 0.7s ease 0.1s both, neonPulse 2s ease-in-out infinite alternate;
-    }
-    h1 span {
-      background: linear-gradient(65deg, #00fff7, #a78bfa, #f472b6, #fbbf24);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    @keyframes neonPulse {
-      from { filter: drop-shadow(0 0 1px #00fff7) drop-shadow(0 0 3px #a78bfa) drop-shadow(0 0 5px #f472b6); }
-      to   { filter: drop-shadow(0 0 3px #00fff7) drop-shadow(0 0 6px #a78bfa) drop-shadow(0 0 10px #f472b6); }
-    }
-
-    .tagline { font-size: 1.1rem; color: #94a3b8; margin-top: 0.75rem; font-weight: 600; animation: fadeUp 0.7s ease 0.2s both; }
-
-    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-top: 1.5rem; animation: fadeUp 0.7s ease 0.3s both; }
-    .chip { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 999px; padding: 0.4rem 1rem; font-size: 0.85rem; font-weight: 700; }
-
-    .hero-btns { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.7s ease 0.4s both; }
-    .btn { padding: 0.75rem 1.75rem; border-radius: 999px; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--purple)); color: #fff; border: none; }
-    .btn-youtube { background: #ff0000; color: #fff; border: none; }
-    .btn-youtube:hover { background: #cc0000; }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
-
-    section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-    .section-title { font-family: 'Righteous', cursive; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; margin-bottom: 1rem; }
-
-    .about-intro { color: #94a3b8; font-size: 1rem; line-height: 1.8; max-width: 750px; margin-bottom: 2rem; }
-
-    .fact-cards { display: flex; flex-direction: column; gap: 1rem; }
-    .fact-row { display: flex; align-items: flex-start; gap: 1rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 1rem; padding: 1rem 1.25rem; }
-    .fact-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .fact-label { font-size: 0.75rem; color: #64748b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
-    .fact-value { font-weight: 800; color: #f1f5f9; font-size: 0.95rem; }
-
-    .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
-    .interest-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 1.25rem; padding: 1.75rem 1.5rem; transition: transform 0.2s; }
-    .interest-card:hover { transform: translateY(-4px); }
-    .interest-card:nth-child(1) { border-top: 3px solid var(--gold); }
-    .interest-card:nth-child(2) { border-top: 3px solid var(--accent); }
-    .interest-card:nth-child(3) { border-top: 3px solid var(--green); }
-    .interest-card:nth-child(4) { border-top: 3px solid var(--purple); }
-    .interest-card:nth-child(5) { border-top: 3px solid var(--pink); }
-    .interest-card:nth-child(6) { border-top: 3px solid var(--gold); }
-    .interest-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; }
-    .interest-name { font-family: 'Righteous', cursive; font-size: 1.1rem; color: #fff; margin-bottom: 0.4rem; }
-    .interest-desc { font-size: 0.88rem; color: #94a3b8; line-height: 1.6; }
-
-    .milestone-box { background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(244,114,182,0.1)); border: 1px solid rgba(251,191,36,0.3); border-radius: 2rem; padding: 3rem; text-align: center; margin-top: 3rem; }
-    .milestone-num { font-family: 'Righteous', cursive; font-size: clamp(4rem, 12vw, 8rem); line-height: 1; background: linear-gradient(135deg, var(--gold), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .milestone-text { font-size: 1.2rem; color: #e2e8f0; font-weight: 700; margin-top: 0.5rem; }
-    .milestone-sub { font-size: 0.9rem; color: #94a3b8; margin-top: 0.5rem; }
-
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
-    .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 1rem; border: 1px solid var(--border); transition: transform 0.3s; }
-    .gallery-grid img:hover { transform: scale(1.03); }
-
-    .yt-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 2rem; padding: 3rem; text-align: center; margin-top: 3rem; }
-    .yt-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-    .yt-title { font-family: 'Righteous', cursive; font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem; }
-    .yt-desc { color: #94a3b8; margin-bottom: 1.5rem; }
-
-    footer { position: relative; z-index: 1; text-align: center; padding: 2rem; color: #334155; font-size: 0.85rem; border-top: 1px solid var(--border); }
-    footer span { color: #475569; }
-
-    @media (max-width: 700px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      nav { padding: 0.75rem 1rem; }
-      .nav-links { gap: 0.75rem; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="A living digital space for ideas, experiments and discoveries.">
+  <title>NEXUS — A living digital space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/app.js" defer></script>
 </head>
 <body>
-
-  <canvas id="confetti" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;"></canvas>
-  <script>
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
-
-    const colors = ['#38bdf8','#fbbf24','#f472b6','#34d399','#a78bfa','#ffffff','#fb7185'];
-    const pieces = Array.from({length: 80}, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * -canvas.height,
-      w: Math.random() * 10 + 5,
-      h: Math.random() * 5 + 3,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      speed: Math.random() * 2 + 1,
-      angle: Math.random() * 360,
-      spin: (Math.random() - 0.5) * 3,
-      drift: (Math.random() - 0.5) * 1.5,
-    }));
-
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pieces.forEach(p => {
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate(p.angle * Math.PI / 180);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = 0.8;
-        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-        ctx.restore();
-        p.y += p.speed;
-        p.x += p.drift;
-        p.angle += p.spin;
-        if (p.y > canvas.height) {
-          p.y = -10;
-          p.x = Math.random() * canvas.width;
-        }
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
-  </script>
-
-  <nav>
-    <a class="nav-logo" href="#">DG ✨</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#interests">Interests</a></li>
-      <li><a href="#birthday">Milestone</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#youtube">YouTube</a></li>
-    </ul>
-  </nav>
-
-  <section class="hero">
-    <div class="badge">🚀 Class 6-A · St. John's School</div>
-    <div class="avatar-ring">
-      <img src="images/profile.jpg" alt="Dhairya Gupta" onerror="this.style.display='none'"/>
+  <div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Nexus home"><span class="brand-mark">N</span><span data-site="brand">NEXUS</span></a>
+    <nav class="main-nav" aria-label="Main navigation"><a href="#discover">Discover</a><a href="#signals">Signals</a><a href="#about">About</a></nav>
+    <div class="toolbar">
+      <label class="theme-control"><span class="sr-only">Choose visual style</span><span class="theme-icon">◐</span><select id="theme-select" aria-label="Choose visual style"><option value="aurora">Aurora</option><option value="monolith">Monolith</option><option value="playground">Playground</option><option value="terminal">Terminal</option></select></label>
+      <button class="icon-button" id="studio-open" aria-label="Open content studio" title="Content studio">✳</button>
     </div>
-    <h1>Dhairya <span>Gupta</span></h1>
-    <p class="tagline">Coder · Abacus Champ · Badminton Player · Space Explorer</p>
-    <div class="chips">
-      <div class="chip">🧮 Abacus</div>
-      <div class="chip">🚀 Space</div>
-      <div class="chip">🏸 Badminton</div>
-      <div class="chip">💻 Coding</div>
-      <div class="chip">🎂 Freshly 10!</div>
-    </div>
-    <div class="hero-btns">
-      <a href="#about" class="btn btn-primary">Know Me Better 👋</a>
-      <a href="https://www.youtube.com/@jaigupta6652" target="_blank" class="btn btn-youtube">▶ My YouTube</a>
-    </div>
-  </section>
+  </header>
 
-  <section id="about">
-    <div class="section-label">Who Am I?</div>
-    <h2 class="section-title">About Me 👋</h2>
-    <p class="about-intro">
-      Hi, I'm Dhairya! I'm a curious, energetic 10-year-old who loves learning new things every day. Whether it's cracking numbers on the abacus, dreaming about galaxies, smashing on the badminton court, or writing my first lines of code — I'm always exploring!<br/><br/>
-      I believe learning is the biggest superpower anyone can have. And I'm just getting started! 💪
-    </p>
-    <div class="fact-cards">
-      <div class="fact-row">
-        <div class="fact-icon">📅</div>
-        <div><div class="fact-label">Born</div><div class="fact-value">1st March, 2016</div></div>
-      </div>
-      <div class="fact-row">
-        <div class="fact-icon">🏫</div>
-        <div><div class="fact-label">School</div><div class="fact-value">St. John's School, Greater Noida West</div></div>
-      </div>
-      <div class="fact-row">
-        <div class="fact-icon">📖</div>
-        <div><div class="fact-label">Class</div><div class="fact-value">6th — Section A</div></div>
-      </div>
-      <div class="fact-row">
-        <div class="fact-icon">📍</div>
-        <div><div class="fact-label">Location</div><div class="fact-value">Greater Noida West, India 🇮🇳</div></div>
-      </div>
-    </div>
-  </section>
+  <main id="home">
+    <section class="hero shell">
+      <div class="eyebrow"><span class="status-dot"></span><span data-site="eyebrow">A DIGITAL SPACE FOR WHAT'S NEXT</span></div>
+      <p class="hero-kicker" data-site="kicker">Ideas are only the beginning.</p>
+      <h1 data-site="headline">Make room<br>for <span class="gradient-text">possibility.</span></h1>
+      <p class="hero-copy" data-site="intro">A flexible canvas for curiosity, experiments and things worth sharing. Always evolving. Never finished.</p>
+      <div class="hero-actions"><a class="button button-primary" href="#discover" data-site-link="primary">Explore the space <span>↗</span></a><a class="text-link" href="#about" data-site-link="secondary">How it works <span>↓</span></a></div>
+      <div class="hero-orbit" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit-core"><span>✳</span></div><i class="orbit-point point-a"></i><i class="orbit-point point-b"></i><i class="orbit-point point-c"></i></div>
+      <div class="hero-foot"><span>OPEN CANVAS / 001</span><span>BUILT TO CHANGE <span class="pulse">●</span></span></div>
+    </section>
 
-  <section id="interests">
-    <div class="section-label">Passions</div>
-    <h2 class="section-title">What I Love ❤️</h2>
-    <div class="interests-grid">
-      <div class="interest-card">
-        <div class="interest-emoji">🧮</div>
-        <div class="interest-name">Abacus</div>
-        <div class="interest-desc">I can calculate super-fast using the abacus! It trains my brain to be sharp and quick with numbers.</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-emoji">🚀</div>
-        <div class="interest-name">Space Exploration</div>
-        <div class="interest-desc">Stars, planets, black holes, rockets — the universe is HUGE and I want to know everything about it!</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-emoji">🏸</div>
-        <div class="interest-name">Badminton</div>
-        <div class="interest-desc">I love playing badminton! It keeps me active, sharp and teaches me focus and strategy.</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-emoji">💻</div>
-        <div class="interest-name">Coding</div>
-        <div class="interest-desc">I'm learning to code and it's amazing! Making computers do what I want feels like a superpower!</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-emoji">🛹</div>
-        <div class="interest-name">Skating</div>
-        <div class="interest-desc">I love skating! It's all about balance, speed, and freedom — pure fun on wheels!</div>
-      </div>
-      <div class="interest-card">
-        <div class="interest-emoji">⚙️</div>
-        <div class="interest-name">Engineering</div>
-        <div class="interest-desc">I love understanding how things work and building stuff! Engineering feels like solving real-world puzzles.</div>
-      </div>
-    </div>
-  </section>
+    <section class="section shell" id="discover">
+      <div class="section-heading"><div><p class="eyebrow">01 / THE COLLECTION</p><h2 data-site="collectionTitle">Explore the unknown.</h2></div><p class="section-note" data-site="collectionIntro">A few starting points. The next one could come from you.</p></div>
+      <div class="feature-grid" id="feature-grid" aria-live="polite"></div>
+    </section>
 
-  <section id="birthday">
-    <div class="section-label">Big Milestone</div>
-    <h2 class="section-title">A Whole Decade! 🎉</h2>
-    <div class="milestone-box">
-      <div class="milestone-num">10</div>
-      <div class="milestone-text">Years of Curiosity, Creativity & Unstoppable Energy 🌟</div>
-      <div class="milestone-sub">
-        From mastering the abacus to exploring distant stars,
-        from his first badminton smash to writing his first lines of code —
-        Dhairya just hit the big 10. The world better watch out! 🚀
-      </div>
-    </div>
-  </section>
+    <section class="signal-band" id="signals"><div class="shell signal-inner"><div><p class="eyebrow">02 / LIVE PRINCIPLES</p><h2 data-site="signalTitle">Stay curious.<br><span class="gradient-text">Stay in motion.</span></h2></div><div class="signal-list" id="signal-list"></div></div></section>
 
-  <section id="gallery">
-    <div class="section-label">Snapshots</div>
-    <h2 class="section-title">My Gallery 📸</h2>
-    <div class="gallery-grid">
-      <img src="images/image1.jpeg" alt="Dhairya"/>
-      <img src="images/image2.jpeg" alt="Dhairya"/>
-      <img src="images/image3.png" alt="Dhairya"/>
-      <img src="images/image4.jpeg" alt="Dhairya"/>
-      <img src="images/image5.jpeg" alt="Dhairya"/>
-      <img src="images/image6.jpeg" alt="Dhairya"/>
-    </div>
-  </section>
+    <section class="section shell about-section" id="about"><div><p class="eyebrow">03 / THE IDEA</p><h2 data-site="aboutTitle">A website that grows with its ideas.</h2></div><div><p class="about-copy" data-site="aboutText">NEXUS is a content-first digital canvas. Its visual identity can change, its content lives in one approachable file, and its future can be shaped with AI-assisted workflows.</p><a class="text-link" href="EDITING.md">Read the editing guide ↗</a></div></section>
+  </main>
 
-  <section id="youtube">
-    <div class="section-label">Content</div>
-    <h2 class="section-title">My YouTube 🎬</h2>
-    <div class="yt-card">
-      <div class="yt-icon">▶️</div>
-      <div class="yt-title">Watch My Videos!</div>
-      <p class="yt-desc">I make videos about things I love — coding, space, abacus, and my adventures! Subscribe and join me on my journey of curiosity and discovery!</p>
-      <a href="https://www.youtube.com/@jaigupta6652" target="_blank" class="btn btn-youtube">▶ Visit Dhairya's Channel</a>
-    </div>
-  </section>
+  <footer class="footer shell"><a class="brand" href="#home"><span class="brand-mark">N</span><span data-site="brand">NEXUS</span></a><span data-site="footer">An evolving digital canvas · Made to be remade.</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
 
-  <footer>
-    Made with ❤️ by <span>Dhairya Gupta</span> · Class 6-A · St. John's School, Greater Noida West<br/>
-    🎂 Celebrating 10 amazing years · © 2026 🚀
-  </footer>
-
+  <dialog class="studio" id="studio" aria-labelledby="studio-title">
+    <form method="dialog" class="studio-top"><div><p class="eyebrow">NO-CODE WORKSPACE</p><h2 id="studio-title">Content studio</h2></div><button class="icon-button close-button" aria-label="Close">×</button></form>
+    <p class="studio-intro">Make a draft in this browser, ask an AI assistant to help shape it, then export the content file. Nothing is published automatically.</p>
+    <div class="studio-actions"><button class="button button-primary" id="export-content">Export content JSON ↓</button><label class="button button-quiet file-label">Import content JSON ↑<input id="import-content" type="file" accept="application/json"></label><button class="button button-quiet" id="copy-ai-prompt">Copy AI update prompt ✳</button></div>
+    <p class="studio-hint" id="studio-status" role="status">The live website content is stored in content/site.json.</p>
+    <div class="studio-footer">For shared, permanent updates, commit the exported file to GitHub. Browser drafts are local to this device.</div>
+  </dialog>
 </body>
 </html>
