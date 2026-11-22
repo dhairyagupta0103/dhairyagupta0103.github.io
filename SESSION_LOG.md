@@ -25,7 +25,7 @@ This file is the durable handoff between work sessions. Update it in every task 
 | Session / task | Date (UTC) | Delivered | PR / status | Next handoff |
 |---|---|---|---|---|
 | Initial NEXUS foundation | 2026-11-22 | Replaced the birthday-oriented homepage with a generic, responsive NEXUS canvas; added four themes, content JSON, browser Content Studio import/export and editing guide; removed old profile/gallery files from the current tree. This work was committed directly to `main` before the PR-only policy was established. | Historical direct-to-main commits; not a PR. | Establish PR-first workflow and session handoff. |
-| Governance foundation | 2026-11-22 | Add task-driven contribution rules, PR template, session log and basic CI validation. | In progress: this PR. | Build Control Center and secure AI-to-PR orchestration. |
+| Governance foundation | 2026-11-22 | Added task-driven contribution rules, PR template, session log and basic CI validation. | [PR #1](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/1) — open; CI running. | Build Control Center and secure AI-to-PR orchestration. |
 
 ## How to update this log
 
