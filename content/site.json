@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "brand": "NEXUS",
+    "eyebrow": "A DIGITAL SPACE FOR WHAT'S NEXT",
+    "kicker": "Ideas are only the beginning.",
+    "headline": "Make room|for possibility.",
+    "intro": "A flexible canvas for curiosity, experiments and things worth sharing. Always evolving. Never finished.",
+    "primaryLabel": "Explore the space",
+    "primaryHref": "#discover",
+    "secondaryLabel": "How it works",
+    "secondaryHref": "#about",
+    "collectionTitle": "Explore the unknown.",
+    "collectionIntro": "A few starting points. The next one could come from you.",
+    "signalTitle": "Stay curious.|Stay in motion.",
+    "aboutTitle": "A website that grows with its ideas.",
+    "aboutText": "NEXUS is a content-first digital canvas. Its visual identity can change, its content lives in one approachable file, and its future can be shaped with AI-assisted workflows.",
+    "footer": "An evolving digital canvas · Made to be remade."
+  },
+  "features": [
+    {
+      "icon": "✳",
+      "title": "Ideas & imagination",
+      "description": "A home for concepts, questions and sparks that deserve room to grow.",
+      "tag": "THINK"
+    },
+    {
+      "icon": "⌘",
+      "title": "Experiments",
+      "description": "Small prototypes, playful explorations and lessons discovered along the way.",
+      "tag": "MAKE"
+    },
+    {
+      "icon": "◎",
+      "title": "Discoveries",
+      "description": "Useful things collected, connected and made easier to explore.",
+      "tag": "EXPLORE"
+    }
+  ],
+  "signals": [
+    {
+      "label": "Curiosity over convention",
+      "value": "MINDSET / 01"
+    },
+    {
+      "label": "Clarity over complexity",
+      "value": "DESIGN / 02"
+    },
+    {
+      "label": "Progress over perfection",
+      "value": "MOTION / 03"
+    }
+  ],
+  "theme": "aurora"
+}
