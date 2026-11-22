@@ -1,33 +1,45 @@
-# NEXUS — no-code editing guide
+# ChatGPT website handoff guide
 
-NEXUS is a static, content-driven website. The design system lives in `assets/styles.css`, rendering and interactions in `assets/app.js`, and all editable site copy/cards in `content/site.json`.
+## Purpose
 
-## Update without coding
-1. Open the website and select the ✳ Content studio control.
-2. Export the current `site.json` file.
-3. Give that file to ChatGPT with this instruction: "Update this NEXUS website content. Keep it generic and do not add personal data. Return the complete valid JSON only."
-4. Import the returned JSON in the Content studio to preview it.
-5. Export the approved JSON and replace `content/site.json` in this GitHub repository. Commit the change. GitHub Pages will publish it.
+This repository is intended to be maintainable through ordinary-language requests in ChatGPT. A non-technical person should be able to say what they want changed; ChatGPT should handle the code, checks, task branch, pull request and session handoff.
 
-The studio is a local preview/import/export tool. It does not write to GitHub by itself and does not send data to an AI service.
+This is a target workflow, not a fully connected automation yet.
 
-## Multiple ChatGPT conversations
-Treat `content/site.json` as the shared source of truth. Start each new conversation by providing this guide and the latest JSON file. Ask ChatGPT to return a complete replacement JSON, not a partial patch. Review the diff/version history in GitHub before publishing. For simultaneous edits, coordinate one editor at a time or reconcile changes before committing.
+## How a new ChatGPT session should start
 
-## Content schema
-- `meta`: brand, hero copy, section headings, links, footer.
-- `features`: array of cards with icon, title, description, tag.
-- `signals`: array of short principles with label and value.
-- `theme`: initial theme: `aurora`, `monolith`, `playground`, or `terminal`.
+1. Open the repository: https://github.com/dhairyagupta0103/dhairyagupta0103.github.io
+2. Ask ChatGPT to read `CHATGPT_INSTRUCTIONS.md` and `SESSION_LOG.md` before making changes.
+3. Describe the desired result in plain language. The requester does not need to name files or explain HTML, CSS or JavaScript.
+4. ChatGPT should inspect the current branch, existing pull requests and relevant files before editing.
+5. ChatGPT should make the change on a task-specific branch, run relevant checks, update `SESSION_LOG.md`, and open a PR to `main`.
+6. The owner reviews and approves the PR before it is merged. The website is not updated just because a PR was opened.
 
-## AI integration roadmap
-The current site is AI-ready, not AI-connected. The Content Studio generates a prompt for ChatGPT and supports portable JSON. A future secure integration can add authenticated GitHub PR creation, schema validation, approvals and an AI provider. Never put an AI API key or GitHub token in browser JavaScript or public repository files.
+## What the requester should experience
 
-## Privacy baseline
-Keep identifying and sensitive personal information out of public content. Avoid private photos, personal contact details, precise location, school/work identifiers, birthdays and private schedules. Review changes before publishing.
+The requester should only need to:
+- explain the outcome they want;
+- answer a genuine design/content question if the answer cannot be safely inferred;
+- review the preview or screenshots where available;
+- approve the proposed change before publication.
 
-## Technical notes
-- No framework or build step; GitHub Pages can serve the static files.
-- Theme selection is visitor-controlled and remembered locally.
-- Reduced-motion preferences are respected.
-- Content is escaped before being rendered as HTML.
+ChatGPT should choose technical implementation details and explain the result in simple language.
+
+## Important current limitation
+
+The repository does not yet contain a secure service that automatically connects any ChatGPT account to GitHub. The browser Content Studio is a local JSON import/export helper only; it does not talk to ChatGPT, create branches, or open PRs.
+
+A GitHub connector connected to one ChatGPT account is not automatically available to another person or another account. Before handing this to the nephew, set up the appropriate GitHub repository access and a supported ChatGPT-to-GitHub workflow for the account he will use. Never share personal access tokens or put credentials in website files.
+
+## Delivery rules
+
+- All assistant-authored changes go through a task-specific branch and PR to `main`.
+- Never commit directly to `main`.
+- Never merge without owner approval.
+- Update `SESSION_LOG.md` in every task PR.
+- Run checks and state clearly what was or was not tested.
+- Keep private details and credentials out of public website content and repository files.
+
+## Project status
+
+See `SESSION_LOG.md` for current state, previous work, open PRs, risks and next focus.
