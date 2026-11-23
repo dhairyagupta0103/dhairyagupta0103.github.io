@@ -38,7 +38,9 @@ Read `PRODUCT_BLUEPRINT.md` and `MVP_IMPLEMENTATION_PLAN.md` before expanding sc
 
 ## Current implementation status
 
-The PR currently contains a fictional sample creative workspace called Little Big Lab, Playwright checks and a GitHub Actions validation workflow. This is a demonstration foundation only. It does **not** yet create project repositories, connect to ChatGPT, or publish user projects.
+The PR contains a fictional sample creative workspace called Little Big Lab, Playwright checks and a GitHub Actions validation workflow. It also now contains a first reusable static-site starter at `starter/static-site/` with a project brief, ChatGPT prompt pack, validation workflow and GitHub Pages deployment workflow. The starter is a folder in this repository, not yet a separate GitHub template repository. It has not yet been copied into a separate sample repository or deployed as an independent Pages site.
+
+The platform still does **not** automatically create project repositories or provide a universal ChatGPT write integration. The standard ChatGPT GitHub app is read-only; use an eligible Codex workflow where available or the manual upload fallback.
 
 New product documents:
 - `PRODUCT_BLUEPRINT.md`: product promise, user journey, architecture, free-tier constraints and age boundaries.
@@ -46,13 +48,12 @@ New product documents:
 
 ## Next build sequence
 
-1. Create one public static project template repository with a beginner-friendly README, project metadata and validation workflow.
-2. Add a GitHub Pages deployment workflow that publishes only from the approved default branch.
-3. Test the template manually using fictional content in a separate sample repository.
-4. Add the ChatGPT project brief/prompt pack and manual file-upload path; document optional Codex direct editing where available.
-5. Add a simple public project manifest to the portfolio.
-6. Verify the full idea → files → checks → preview → owner-approved publish → portfolio flow.
-7. Only then consider a tiny adult-supervised pilot.
+1. Create a separate public sample repository from `starter/static-site/` and enable GitHub Pages using GitHub's Settings UI.
+2. Verify the starter's validation workflow and approved-main-only Pages deployment.
+3. Add a project starter chooser and copyable ChatGPT brief to the creator workspace.
+4. Add a simple public project manifest to the portfolio.
+5. Verify the full idea → files → checks → preview → owner-approved publish → portfolio flow.
+6. Only then consider a tiny adult-supervised pilot.
 
 ## Session rules
 
