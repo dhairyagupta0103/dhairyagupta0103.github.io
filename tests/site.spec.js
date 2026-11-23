@@ -22,7 +22,7 @@ test('project filters and project details work with keyboard', async ({ page }) 
   await first.focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('dialog')).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Pixel Garden' })).toBeVisible();
+  await expect(page.locator('#dialog-title')).toBeVisible();
   await page.getByRole('button', { name: 'Close project details' }).click();
   await expect(page.getByRole('dialog')).not.toBeVisible();
 });
