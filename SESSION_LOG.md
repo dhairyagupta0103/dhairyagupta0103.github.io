@@ -39,8 +39,8 @@ The creator describes changes in ordinary language. ChatGPT sessions handle impl
 - Added Playwright browser checks for rendering, filtering, keyboard interaction and mobile overflow.
 - Updated GitHub Actions to validate sample JSON, run browser tests and save sample-only screenshot/test artifacts.
 - Rewrote the editing guide and task template for ordinary-language, same-PR iteration.
-- The former unused `content/site.json` NEXUS content should be removed as cleanup if not already removed.
-- A hosted PR preview is not guaranteed yet. The candidate static preview URL is a commit-pinned raw.githack URL; verify it actually renders before sharing it as a working preview.
+- Removed the obsolete unused `content/site.json` NEXUS content. Preserved the seven existing image assets from the approved `main` baseline in this PR; the new sample homepage does not expose or repurpose them.
+- A hosted PR preview is not guaranteed yet. A commit-pinned raw.githack URL is included as a convenience preview, but has not been verified by the web inspection tool.
 - No private content store, authenticated personal preview, or automatic private preview is configured.
 
 ## Safety and publication boundaries
@@ -72,7 +72,7 @@ The creator describes changes in ordinary language. ChatGPT sessions handle impl
 | PR workflow and handoff | 2026-11-22 | Added PR-first rules, session history, task template and handoff documentation. | PR #2; open, unmerged. | Make sessions manage the technical workflow. |
 | History cleanup | 2026-11-22 | Restored main to pre-assistant baseline and retained a recovery branch. | PR #2; open, unmerged. | Review complete diff before approval. |
 | Creative workspace clarification | 2026-11-23 | Captured experiment-first product direction, same-PR iteration, discard/restart, flexible artefact storage and sensible personal-image care. | PR #2; open, unmerged. | Implement a working sample experience. |
-| First creative workspace implementation | 2026-11-23 | Replaced NEXUS homepage in the PR branch with a sample-driven project workspace; added sample projects, updates, project filters/details, Playwright checks and GitHub Actions browser validation. | PR #2; open, unmerged. Preview and workflow still need verification. | Verify the preview and browser checks, then fix any issues in this PR. |
+| First creative workspace implementation | 2026-11-23 | Replaced NEXUS homepage in the PR branch with a sample-driven project workspace; added sample projects, updates, project filters/details, Playwright checks and GitHub Actions browser validation. Preserved the seven original image assets unchanged. Fixed two issues found by the first browser run (ambiguous dialog-heading selector and mobile overflow). | PR #2; open, unmerged. Follow-up browser run pending. | Verify the current preview and checks, then collect creator feedback. |
 
 ## Session finish checklist
 
