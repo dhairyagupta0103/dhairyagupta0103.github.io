@@ -1,69 +1,108 @@
-# Preview and configuration architecture
+# Creative workspace and preview architecture
 
-## Required outcome
+## Product goal
 
-Every pull request must be viewable in a real browser before it is merged. The nephew must be able to inspect the latest proposed design with his real website content. ChatGPT and automated browser checks must be able to inspect the same proposed code without receiving the nephew's personal content.
+Build a welcoming, low-friction place where a young creator can explore ideas and make projects of any size. It should support quick experiments and POCs, ongoing work, public work-in-progress updates and a curated portfolio. The portfolio is one part of the website, not the whole product.
 
-## One renderer, separate data
+The creator should be able to ask for changes in ordinary language. ChatGPT sessions handle implementation, tests, branches and PRs. The creator mainly needs to try the preview and say what feels right or what should change.
 
-The homepage must be rendered by shared website code using a configuration object. The renderer must not contain the nephew's name, biography, photos, projects, school, contact details or other personal information as hard-coded values.
+## A project can grow, pause, or disappear
 
-The public code repository must contain a clearly labelled, entirely fictional sample configuration (target path: `content/site.sample.json`). Use obviously invented sample identity details, projects and placeholder imagery. It must be realistic enough to exercise every homepage component and responsive layout.
+Use a lightweight lifecycle rather than forcing every idea into a formal process:
 
-The real personal configuration must live outside the public repository and outside ChatGPT-readable PR files. It must not be copied into PR diffs, logs, screenshots, test output, build logs or browser-test traces.
+1. **Try it:** start with the smallest useful prototype. It can be rough and temporary.
+2. **Explore it:** iterate quickly, including through multiple preview revisions on one PR.
+3. **Keep or discard:** keep useful work, archive it if its history matters, or close/discard it. A POC does not have to become a permanent repo project.
+4. **Share it:** if the creator chooses, publish it as an experiment or work-in-progress with an honest status.
+5. **Promote it:** when it is ready and the creator wants it featured, add it to the curated portfolio.
 
-## Two views of every PR
+Do not require a polished brief, project plan or portfolio-ready result before starting. Do not confuse a preview with permission to publish.
+
+## Decide where each artefact belongs
+
+A session should make a sensible storage decision for each task instead of putting everything in the public repository.
+
+- **Public repository:** reusable source code, site components, public project pages and assets intentionally selected for public release.
+- **Temporary task branch/PR:** short-lived experiments and prototypes that are being reviewed. They can be discarded without changing the live site.
+- **Private or less-accessible storage:** personal drafts, private notes, original personal photos, high-resolution originals, private datasets, credentials and material that should not be visible in public Git history.
+- **AI-safe fixtures:** fictional sample content only, for tests, browser inspection, screenshots and logs.
+
+Keep the default cautious when personal information is involved, but do not over-restrict normal creative work. A creator-selected image or project can be published after an intentional review. Preserve private originals where appropriate, use a reviewed public copy, consider image rights and other people's privacy, and remove location metadata from public copies where feasible.
+
+A file deleted in a later commit may still exist in Git history. Therefore, never commit a secret or highly sensitive file on the assumption it can simply be deleted later.
+
+## One renderer, multiple kinds of content
+
+The site should support more than a portfolio grid. Its content model should be able to represent:
+- a project or experiment with title, summary, status, date and links;
+- a project detail page or standalone interactive demo;
+- work-in-progress notes or release/update entries;
+- a discovery/projects area for public experiments;
+- a curated portfolio section for selected work;
+- profile/about information and optional contact links.
+
+The renderer should use configuration/data rather than hard-coding the creator's personal details. Public repository fixtures should be obviously fictional and exercise all supported page types and layouts.
+
+## PR-first preview and iteration
+
+Every requested change should be delivered through a task PR. No direct commits to `main`.
+
+- Create one PR for a coherent task or project increment.
+- Build a preview from the PR's exact head commit.
+- Show the creator the preview in plain language.
+- Accept feedback and push revisions to the same PR.
+- Refresh the preview after every new commit and make its commit identity visible.
+- Keep the PR open while the creator iterates.
+- When the creator confirms that it looks good and is ready for promotion, hand it to the owner for approval.
+- Do not merge, deploy or promote automatically.
+
+A creator may abandon a POC at any time. Close the PR or leave it clearly marked as abandoned; do not merge it to preserve it. If preserving the experiment is useful, retain the branch or archive it without changing the live site.
+
+## Two views of each proposed change
+
+Both views should use the same application code and exact PR commit, but different data sources.
 
 ### A. AI-safe preview
 
-- Built automatically from the PR's exact head commit.
-- Always uses `content/site.sample.json`, never the real personal configuration.
-- Has a stable link recorded on the PR.
-- Accessible to the ChatGPT browser/inspection workflow and automated Playwright checks.
-- Browser checks cover homepage rendering, navigation, responsive layouts, keyboard access, missing images and console/network errors.
-- Screenshots and test artifacts must contain sample content only.
+- Automatically built from the exact PR head commit.
+- Uses only fictional sample configuration and placeholder assets from the public repository.
+- Accessible to ChatGPT browser inspection and automated Playwright checks.
+- Tests navigation, project pages, responsive layouts, keyboard access, image loading and browser errors.
+- Screenshots, traces, logs and artifacts contain sample content only.
+- The PR shows the preview URL and exact commit SHA.
 
 ### B. Personal review preview
 
-- Uses the exact same PR code/head commit as the AI-safe preview.
-- Loads the real personal configuration from a separate private source only for the nephew's authenticated browser session.
-- Protected by an access-control layer. The nephew can sign in and inspect the actual content and layout before merge.
-- The ChatGPT session and automated browser jobs receive neither its URL nor credentials, cookies, private config, API response bodies or screenshots.
-- This preview is generated only through a trusted, owner-authorized process. Do not expose private configuration or secrets to arbitrary PR build scripts.
+- Uses the exact same application code/PR commit.
+- Loads selected real content from a separate private source.
+- Available only to the creator/owner through authentication.
+- Lets the creator check personal copy, selected images and the actual presentation before approving a change.
+- ChatGPT sessions and automated jobs never receive its URL, credentials, cookies, private configuration, response bodies or screenshots.
+- Generated only by a trusted, owner-authorized process. Do not expose private configuration/secrets to arbitrary PR build scripts that an unreviewed change can modify.
 
-Both preview links must identify the PR number and exact commit SHA, so it is obvious which code version is being reviewed. A new commit to the PR must refresh both previews or clearly mark the previous preview as stale.
+A new commit must refresh both previews or clearly mark old previews as stale. The creator should not need to understand commit hashes; the session should explain which preview is current.
 
 ## Privacy boundary
 
-A sample configuration prevents the normal AI inspection workflow from receiving personal content. It does not make content secret if that content is published on a public website: anyone who can open a public page can view its rendered content. If the owner requires that personal content be inaccessible to ChatGPT and other unauthenticated visitors, the real-content view must require authentication and must not be exposed through a public URL.
+The AI-safe preview keeps personal data out of the AI inspection workflow. It does not make a public production website private. Anyone who can open a public page can see its rendered content, including AI-enabled browsers. Publish only details and images that the creator and owner intentionally choose to make public.
 
-The production website should publish only content the owner and nephew intentionally choose to make public. Never treat a robots/noindex header or an unshared URL as an access-control mechanism.
+If actual personal content must be inaccessible to unauthenticated visitors, protect the personal view with authentication and ensure there is no alternate unprotected Pages/default/custom domain route. A hidden URL or noindex directive is not access control.
 
-## Suggested hosting approach
+Never put personal information, private images, passwords, tokens, private messages or private datasets into public PRs, Git history, test fixtures, browser traces, screenshots or build logs. Use a reviewed public copy of selected assets where appropriate. Avoid exposing identifying information such as school, home address, phone number, precise location or routine schedule.
 
-Evaluate Cloudflare Pages for automatic PR preview deployments and Cloudflare Access for restricting the real-content preview. Cloudflare documents automatic per-PR preview URLs and Access policies for preview deployments. Its preview Access setting does not protect the project's default `*.pages.dev` domain or custom domains, so the deployment design must account for those separately. Do not assume a preview is private until its access policy has been tested.
+## Hosting direction and current limits
 
-Alternative: Netlify Deploy Previews also build from PRs and support preview-specific environment configuration and access restrictions. Check current plan limits before selecting it.
+Evaluate a host that supports PR preview deployments and a separate authenticated personal preview. Cloudflare Pages + Access is a candidate; its preview Access setting does not automatically protect the default `*.pages.dev` domain or custom domains, so all alternate routes must be tested. Netlify Deploy Previews are another candidate. No provider, domain, private content source or authenticated preview is configured yet.
 
-No hosting provider, domain, account, secret or private content source has been configured yet. This document records the required design, not a claim that previews are already deployed.
-
-## Implementation sequence
-
-1. Define the homepage configuration schema and build a fictional sample portfolio configuration.
-2. Refactor the homepage so all profile, introduction, project, interest, link and image content comes from that configuration.
-3. Ensure public repository tests and AI inspection can only use the sample configuration.
-4. Add Playwright browser tests against the sample preview and attach screenshots/results to each PR.
-5. Configure automatic safe PR previews and publish the exact preview URL in the PR.
-6. Choose a private content store and implement the owner-authorized, authenticated personal preview. Do not pass personal data to untrusted PR workflows.
-7. Test that an unauthenticated browser and the AI-safe preview cannot retrieve the private configuration.
-8. Add the personal preview link to the PR for the nephew/owner only, without exposing it in public logs or AI-readable artifacts.
+Do not claim a preview exists until it has been deployed and tested. The architecture must also avoid handing private secrets to arbitrary PR workflows.
 
 ## Acceptance criteria
 
-- The homepage is fully driven by configuration; replacing the sample config changes the rendered site without editing the renderer.
-- The repository contains only fictional sample data.
-- Every PR has an AI-safe, browser-inspectable preview built from the exact PR commit.
-- The AI-safe preview and its tests contain no personal content.
-- The nephew can authenticate and view the latest PR with real content before merge.
-- The real-content preview is not accessible to the AI inspection workflow or unauthenticated visitors.
-- No PR is merged automatically; owner approval remains required.
+- A new idea can start as a small POC without a heavy setup process.
+- The creator can iterate on one PR and see an updated preview after each change.
+- An abandoned experiment can be discarded without affecting the live site.
+- The website can show public projects/work-in-progress as well as a curated portfolio.
+- Sessions decide sensible storage locations and keep private material out of public Git history.
+- Public tests and AI inspection use fictional sample content only.
+- The creator can inspect a real-content preview through a separate authenticated route.
+- The creator explicitly confirms readiness before owner approval; no automatic merge or publication.
