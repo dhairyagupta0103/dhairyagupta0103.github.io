@@ -93,3 +93,16 @@ Say in plain language:
 - that nothing has been published until the required approval and merge happen.
 
 Avoid Git jargon unless the creator asks. Do not ask the creator to make routine technical choices.
+
+
+## Agreed product MVP direction
+
+The product is a creator-first AI project workspace: idea → ChatGPT-assisted files → GitHub source/history → validation and preview → owner-approved GitHub Pages publication → selected portfolio entry. Read `PRODUCT_BLUEPRINT.md` and `MVP_IMPLEMENTATION_PLAN.md` before designing features.
+
+First-release constraints:
+- GitHub + GitHub Pages, ChatGPT, public static project templates and GitHub Actions only.
+- Free-tier-first; no paid API, paid domain, paid hosting or mandatory custom MCP server.
+- Standard ChatGPT GitHub access is read-only. Do not promise direct GitHub writes from ordinary ChatGPT; use an eligible Codex workflow if available or provide a manual file-upload fallback.
+- No browser-side GitHub token, platform backend, child account system, comments, DMs, payments or arbitrary server execution in v1.
+- GitHub Pages on GitHub Free means public repositories and public content. Never store private drafts or personal/sensitive content there.
+- ChatGPT and GitHub have 13+ minimum-age rules (or higher local minimums); ChatGPT users under 18 need parental permission. For under-13 children, an adult must conduct the ChatGPT interaction and manage accounts. Never share credentials or bypass age restrictions.
