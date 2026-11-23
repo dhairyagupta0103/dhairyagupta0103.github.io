@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "preferences": {
+    "language": "English",
+    "explanation_style": "plain and encouraging",
+    "design_direction": "clear, playful, readable and mobile-friendly",
+    "default_project_scope": "small first version, then iterate",
+    "accessibility": ["keyboard usable", "readable contrast", "clear labels"]
+  }
+}

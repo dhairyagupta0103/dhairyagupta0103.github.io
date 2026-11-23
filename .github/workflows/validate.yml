@@ -1,0 +1,77 @@
+name: Validate and preview sample site
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  browser-checks:
+    name: Sample site browser checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install test tools
+        run: npm install
+      - name: Check JavaScript syntax
+        run: node --check assets/app.js
+      - name: Validate fictional sample content
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const assert = require('node:assert/strict');
+          const data = JSON.parse(fs.readFileSync('content/site.sample.json', 'utf8'));
+          assert.ok(data.meta && typeof data.meta.name === 'string', 'meta.name is required');
+          assert.ok(Array.isArray(data.projects) && data.projects.length >= 1, 'projects must be a non-empty array');
+          assert.ok(Array.isArray(data.updates), 'updates must be an array');
+          const ids = new Set();
+          for (const [index, project] of data.projects.entries()) {
+            assert.ok(project.id && !ids.has(project.id), `projects[${index}].id must be unique`);
+            ids.add(project.id);
+            for (const field of ['title', 'summary', 'status']) assert.equal(typeof project[field], 'string', `projects[${index}].${field} must be text`);
+          }
+          console.log('Fictional sample data is valid.');
+          NODE
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser tests
+        run: npm test
+      - name: Save sample-only preview screenshots and test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-site-browser-checks
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
+      - name: Check starter JavaScript syntax
+        run: node --check starter/static-site/app.js
+      - name: Validate starter project metadata
+        run: |
+          node -e "const p=require('./starter/static-site/project.json'); for (const k of ['title','summary','category','status']) if (typeof p[k] !== 'string' || !p[k].trim()) throw new Error('Invalid starter field: '+k); console.log('Starter metadata is valid.');"
+      - name: Check starter deployment files
+        run: |
+          test -s starter/static-site/index.html
+          test -s starter/static-site/styles.css
+          test -s starter/static-site/README.md
+          test -s starter/static-site/.github/workflows/validate.yml
+          test -s starter/static-site/.github/workflows/deploy-pages.yml
+      - name: Package static project starter
+        run: zip -r starter-template.zip starter/static-site
+      - name: Upload downloadable starter bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-project-starter
+          path: starter-template.zip
+          retention-days: 30

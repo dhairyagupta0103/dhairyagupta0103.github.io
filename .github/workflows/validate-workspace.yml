@@ -1,0 +1,64 @@
+name: Validate creator workspace
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full Git history and tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test project creation and selected-release Pages build
+        run: |
+          temp_dir="$(mktemp -d)"
+          cp -R projects starter portfolio creator shared assets content images scripts index.html "$temp_dir/"
+          cd "$temp_dir"
+          node scripts/create-project.mjs sample-project "Sample Project" "Temporary validation fixture" learning
+          git init -q
+          git config user.name "Creator Workspace CI"
+          git config user.email "ci@example.invalid"
+          git add .
+          git commit -m "test fixture: create sample project"
+          git tag project/sample-project/v0.1.0
+          node --input-type=module -e 'import fs from "node:fs"; const file = "portfolio/portfolio.json"; const manifest = JSON.parse(fs.readFileSync(file, "utf8")); manifest.projects = [{ project_id: "sample-project", version: "0.1.0", tag: "project/sample-project/v0.1.0", title: "Sample Project", summary: "Temporary validation fixture", category: "learning", featured: true }]; fs.writeFileSync(file, JSON.stringify(manifest, null, 2) + "\n");'
+          node scripts/validate-workspace.mjs
+          bash scripts/build-pages.sh
+          test -s _site/projects/sample-project/index.html
+          test -s _site/projects/sample-project/project.json
+      - name: Validate workspace records
+        run: node scripts/validate-workspace.mjs
+      - name: Check project creation script
+        run: node --check scripts/create-project.mjs
+      - name: Check workspace validator
+        run: node --check scripts/validate-workspace.mjs
+      - name: Check Pages build script
+        run: bash -n scripts/build-pages.sh
+      - name: Build Pages output without publishing
+        run: bash scripts/build-pages.sh
+      - name: Save built workspace preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-pages-preview-${{ github.sha }}
+          path: _site
+          retention-days: 14
+      - name: Check shared and starter files
+        run: |
+          test -s shared/design-tokens.css
+          test -s starter/static-site/index.html
+          test -s starter/static-site/styles.css
+          test -s starter/static-site/app.js
+          test -s projects/_template/project.json
+          test -s portfolio/portfolio.json
