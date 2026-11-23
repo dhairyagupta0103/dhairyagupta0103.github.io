@@ -1,66 +1,59 @@
 # ChatGPT handoff
 
-## Product direction
+## Current direction
 
-The target is a **creator-first AI project workspace**, not only a personal portfolio. A creator starts an idea, works with ChatGPT, keeps the project in GitHub, previews it, deliberately publishes it through GitHub Pages and adds selected public work to a portfolio.
+Build a simple, single-user creator workspace around one GitHub repository and the creator's existing ChatGPT session.
 
-Read `PRODUCT_BLUEPRINT.md` and `MVP_IMPLEMENTATION_PLAN.md` before expanding scope. They define the agreed free-tier-first MVP.
+The creator only needs to describe what they want to make or continue. ChatGPT decides whether the work is project work or maintenance, reads the relevant GitHub records, makes changes on a branch and saves progress back to GitHub.
 
-## Agreed first-release constraints
+## Repository
 
-- ChatGPT is the first AI partner; GitHub is the source of truth and version history.
-- GitHub Pages is the first public static hosting target.
-- Use only free tiers and no paid API keys, paid domains or paid hosting in the first release.
-- Begin with static websites, simple browser games and interactive learning pages.
-- No platform backend, database, user accounts, public feed, comments, payments or arbitrary server execution in v1.
-- Do not place GitHub tokens, OAuth secrets or AI keys in browser code or public repositories.
-- Standard ChatGPT GitHub app access is documented as read-only; direct repository editing may require an eligible Codex workflow. Always provide a manual file-upload fallback.
-- A custom MCP integration is a later option, not a v1 dependency.
-- GitHub Pages on GitHub Free requires a public repository. Public repositories and Pages content are public; never put private or identifying material there.
-- A commit-pinned external static preview is optional and third-party. It is not our own hosting service and must never be treated as private.
-- Pull-request checks/artifacts are validation aids; production publishing happens only after owner approval and merge.
+- Repository: dhairyagupta0103/dhairyagupta0103.github.io
+- Default branch: main
+- Foundation PR: https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2
+- Working branch: recovery/all-assistant-changes-pr
+- PR #2 is open and unmerged. Never commit directly to main.
 
-## Young creator age and account boundaries
+## Authoritative instructions
 
-- ChatGPT and GitHub require users to be at least 13 (or the applicable higher local minimum); ChatGPT users under 18 need parent/guardian permission.
-- For under-13 children, an adult must conduct the actual ChatGPT interaction and own/manage the relevant accounts. Do not create a child account, ask for a false age, or share account credentials.
-- For ages 13–17, follow each service's age and parental-permission terms.
-- No child accounts, public social features, comments, direct messages or public popularity rankings in v1.
-- Use fictional data for public demos, tests, screenshots and logs. Public portfolio entries need adult review and creator approval.
+Read README.md, CHATGPT_INSTRUCTIONS.md, governance/SESSION_PLAYBOOK.md, governance/PROJECT_WORKFLOW.md and governance/VERSIONING.md.
 
-## Current repository and PR
+Then inspect GitHub branches, open PRs and the actual project files relevant to the request.
 
-- Repository: `dhairyagupta0103/dhairyagupta0103.github.io`
-- Default branch: `main`
-- PR #2: https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2
-- Branch: `recovery/all-assistant-changes-pr`
-- PR #2 remains open and unmerged. Never commit directly to `main` or merge without explicit readiness and owner approval.
+## Core architecture
 
-## Current implementation status
+- One repository; no separate repository per project.
+- projects/<id>/ stores each project's files, metadata, progress and changelog.
+- projects/_template/ stores reusable project records.
+- starter/static-site/ supplies the starter website files copied into a new project.
+- shared/ stores reusable code and styles.
+- creator/preferences.json stores only non-sensitive preferences.
+- projects/index.json is the project catalogue.
+- portfolio/portfolio.json selects exact released versions for the public launcher.
+- Git branches preserve experiments and unfinished work.
+- Pull requests represent completed units of work.
+- main is the approved history and production website source.
 
-The PR contains a fictional sample creative workspace called Little Big Lab, Playwright checks and a GitHub Actions validation workflow. It also now contains a first reusable static-site starter at `starter/static-site/` with a project brief, ChatGPT prompt pack, validation workflow and GitHub Pages deployment workflow. The starter is a folder in this repository, not yet a separate GitHub template repository. It has not yet been copied into a separate sample repository or deployed as an independent Pages site.
+## Session modes
 
-The platform still does **not** automatically create project repositories or provide a universal ChatGPT write integration. The standard ChatGPT GitHub app is read-only; use an eligible Codex workflow where available or the manual upload fallback.
+A session classifies its work internally:
+- Project mode for one project's creation, continuation or improvement.
+- Maintenance mode for shared code, templates, governance, scripts, schemas, site or workflow changes.
 
-New product documents:
-- `PRODUCT_BLUEPRINT.md`: product promise, user journey, architecture, free-tier constraints and age boundaries.
-- `MVP_IMPLEMENTATION_PLAN.md`: staged delivery plan and acceptance criteria.
+The creator should not need to understand or select these modes.
 
-## Next build sequence
+## Integration boundary
 
-1. Create a separate public sample repository from `starter/static-site/` and enable GitHub Pages using GitHub's Settings UI.
-2. Verify the starter's validation workflow and approved-main-only Pages deployment.
-3. Add a project starter chooser and copyable ChatGPT brief to the creator workspace.
-4. Add a simple public project manifest to the portfolio.
-5. Verify the full idea → files → checks → preview → owner-approved publish → portfolio flow.
-6. Only then consider a tiny adult-supervised pilot.
+Use the GitHub capabilities actually available in the current ChatGPT session. Some GitHub connections are read-only; eligible Codex or connected workflows may provide write access. Do not assume a workflow can be triggered unless the connected GitHub tools confirm it. If the session cannot write or trigger an action, explain the limitation plainly and provide the smallest workable path. Never put credentials in repository files or browser code.
 
-## Session rules
+## Next steps
 
-1. Read `CHATGPT_INSTRUCTIONS.md`, `SESSION_LOG.md`, `PRODUCT_BLUEPRINT.md`, `MVP_IMPLEMENTATION_PLAN.md` and `PREVIEW_ARCHITECTURE.md`.
-2. Inspect current main, open PRs, branch head and workflow status.
-3. Continue this coherent MVP task in PR #2 unless it is merged or explicitly abandoned.
-4. Keep all public fixtures fictional; do not ask for private preview URLs or credentials.
-5. Update `SESSION_LOG.md` with actual work and test results.
-6. Explain outcomes in ordinary language. Never claim a feature exists before it is implemented and tested.
-7. Never merge. The creator confirms readiness and the repository owner approves.
+1. Validate project creation and workspace validation scripts.
+2. Verify the preview artifact workflow on a work/experiment branch.
+3. Configure GitHub Pages to publish through Actions once the deployment workflow is ready.
+4. Create one fictional sample project to test folder → branch → preview → PR → release tag → portfolio selection.
+5. Only then refine the creator-facing dashboard.
+
+## Rules
+
+GitHub is the source of truth. No direct commits to main. Experiments stay on branches until complete. PRs are for completed work. Portfolio selections point to immutable tags. Do not merge or publish without an explicit creator instruction.

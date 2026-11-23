@@ -1,0 +1,36 @@
+name: Prepare project preview bundle
+
+on:
+  push:
+    branches:
+      - "work/**"
+      - "experiment/**"
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+      - name: Prepare preview bundle
+        run: |
+          mkdir -p preview/projects
+          for project in projects/*; do
+            [ -d "$project" ] || continue
+            slug="$(basename "$project")"
+            [ "$slug" = "_template" ] && continue
+            cp -R "$project" "preview/projects/$slug"
+          done
+          cp -R shared preview/shared
+          zip -r project-preview.zip preview
+      - name: Upload preview bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: project-preview-${{ github.sha }}
+          path: project-preview.zip
+          retention-days: 14

@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f4ee">
-  <meta name="description" content="A growing collection of ideas, experiments, projects and things worth sharing.">
-  <title>Little Big Lab — Ideas in progress</title>
+  <meta name="description" content="A home for selected projects and things made along the way.">
+  <title>My Creative Space — Selected projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,74 +15,58 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
-    <a class="brand" href="#top" aria-label="Little Big Lab home"><span class="brand-symbol">✳</span><span data-site="name">Little Big Lab</span></a>
+    <a class="brand" href="#top" aria-label="Creative space home"><span class="brand-symbol">✳</span><span>My Creative Space</span></a>
     <nav class="nav" aria-label="Main navigation">
-      <a href="#workbench">Workbench</a><a href="#field-notes">Field notes</a><a href="#showcase">Showcase</a>
+      <a href="#workbench">Projects</a><a href="#showcase">Featured</a>
     </nav>
-    <a class="top-cta" href="#start">Got an idea? <span aria-hidden="true">↗</span></a>
+    <a class="top-cta" href="#workbench">Explore projects <span aria-hidden="true">↗</span></a>
   </header>
 
   <main id="main">
     <section class="hero page-wrap" id="top">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="live-dot"></span><span data-site="eyebrow">A SMALL SPACE FOR BIG CURIOSITY</span></p>
-        <p class="hero-kicker" data-site="kicker">Make a little. Learn a lot.</p>
-        <h1 data-site="headline">Ideas don't need<br>permission to <em>begin.</em></h1>
-        <p class="hero-intro" data-site="intro">A home for things being figured out: quick experiments, curious side quests, useful projects and the occasional finished thing.</p>
-        <div class="hero-links"><a class="button button-dark" href="#workbench">Explore the work <span>↘</span></a><a class="quiet-link" href="#start">How this place works</a></div>
+        <p class="eyebrow"><span class="live-dot"></span>A SPACE FOR THINGS YOU MAKE</p>
+        <p class="hero-kicker">Ideas become real, one step at a time.</p>
+        <h1>Made with<br><em>curiosity.</em></h1>
+        <p class="hero-intro">A home for projects you have chosen to share. Open a project to launch its selected release.</p>
+        <div class="hero-links"><a class="button button-dark" href="#workbench">Explore projects <span>↘</span></a><a class="quiet-link" href="#showcase">Featured work</a></div>
       </div>
       <div class="hero-art" aria-hidden="true">
         <div class="sun"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="sticker sticker-yellow">TRY<br>THINGS!</div><div class="sticker sticker-blue">IDEA<br>→ THING</div>
+        <div class="sticker sticker-yellow">MAKE<br>THINGS!</div><div class="sticker sticker-blue">IDEA<br>→ THING</div>
         <span class="spark spark-one">✳</span><span class="spark spark-two">✴</span><span class="spark spark-three">✳</span>
         <div class="art-caption">THE WORK IS<br>THE ADVENTURE</div>
       </div>
-      <div class="hero-bottom"><span>AN OPEN-ENDED WORKSPACE</span><span>VERSION 01 <b>●</b></span></div>
+      <div class="hero-bottom"><span>SELECTED PROJECTS</span><span>RELEASES <b>●</b></span></div>
     </section>
 
     <section class="intro-strip">
-      <div class="page-wrap strip-inner"><span class="strip-label">THE RULE</span><p>Start before it's perfect. <strong>Keep what teaches you something.</strong></p><span class="strip-doodle" aria-hidden="true">↗</span></div>
+      <div class="page-wrap strip-inner"><span class="strip-label">THE IDEA</span><p>Build what interests you. <strong>Share the versions you choose.</strong></p><span class="strip-doodle" aria-hidden="true">↗</span></div>
     </section>
 
     <section class="section page-wrap" id="workbench">
       <div class="section-head">
-        <div><p class="eyebrow">01 / THE WORKBENCH</p><h2>Things in motion<span class="heading-dot">.</span></h2></div>
-        <p class="section-desc">Some are tiny. Some are growing. All of them started with “what if?”</p>
+        <div><p class="eyebrow">01 / PROJECTS</p><h2>Things to explore<span class="heading-dot">.</span></h2></div>
+        <p class="section-desc">Each project opens the release selected for sharing.</p>
       </div>
       <div class="filter-row" role="group" aria-label="Filter projects">
         <button class="filter-chip is-active" data-filter="all" aria-pressed="true">Everything <span id="count-all">0</span></button>
-        <button class="filter-chip" data-filter="experiment" aria-pressed="false">Experiments</button>
-        <button class="filter-chip" data-filter="building" aria-pressed="false">Building</button>
-        <button class="filter-chip" data-filter="in-progress" aria-pressed="false">In progress</button>
+        <button class="filter-chip" data-filter="featured" aria-pressed="false">Featured</button>
       </div>
       <div class="project-grid" id="project-grid" aria-live="polite"></div>
-      <p class="empty-state" id="empty-state" hidden>No projects in this corner yet. That's a good excuse to try something.</p>
-    </section>
-
-    <section class="notes-section" id="field-notes">
-      <div class="page-wrap notes-layout">
-        <div><p class="eyebrow">02 / FIELD NOTES</p><h2>Small steps<br>count, too<span class="heading-dot">.</span></h2><p class="notes-lead">A trail of discoveries, little wins and things learned along the way.</p></div>
-        <div class="timeline" id="updates-list"></div>
-      </div>
+      <p class="empty-state" id="empty-state" hidden>No releases have been selected yet. Chosen projects will appear here.</p>
     </section>
 
     <section class="section page-wrap showcase-section" id="showcase">
       <div class="section-head">
-        <div><p class="eyebrow">03 / THE SHOWCASE</p><h2>Made to be shared<span class="heading-dot">.</span></h2></div>
-        <p class="section-desc">A few projects that have earned a spot in the spotlight. The collection can change as new things grow.</p>
+        <div><p class="eyebrow">02 / FEATURED</p><h2>Made to be shared<span class="heading-dot">.</span></h2></div>
+        <p class="section-desc">A small collection of selected releases. The creator can change the selection at any time.</p>
       </div>
       <div class="showcase-grid" id="featured-grid"></div>
     </section>
-
-    <section class="start-section" id="start">
-      <div class="page-wrap start-inner">
-        <div class="start-stamp" aria-hidden="true">NO<br>BIG<br>PLAN<br>NEEDED</div>
-        <div><p class="eyebrow">04 / YOUR NEXT MOVE</p><h2>Got a “what if?”<br><em>That's enough.</em></h2><p>Describe the idea in your own words. It can be a game, a tiny tool, an art experiment, a question or something nobody has tried yet.</p><div class="start-steps"><span><b>01</b> Try a first version</span><span><b>02</b> Play with it</span><span><b>03</b> Keep, change or restart</span></div></div>
-      </div>
-    </section>
   </main>
 
-  <footer class="footer page-wrap"><a class="brand" href="#top"><span class="brand-symbol">✳</span><span data-site="name">Little Big Lab</span></a><p data-site="footer">Curiosity first. Perfection later.</p><a href="#top" class="back-top">BACK TO TOP ↑</a></footer>
+  <footer class="footer page-wrap"><a class="brand" href="#top"><span class="brand-symbol">✳</span><span>My Creative Space</span></a><p>Made one idea at a time.</p><a href="#top" class="back-top">BACK TO TOP ↑</a></footer>
 
   <dialog class="project-dialog" id="project-dialog" aria-labelledby="dialog-title">
     <form method="dialog"><button class="dialog-close" aria-label="Close project details">×</button></form>

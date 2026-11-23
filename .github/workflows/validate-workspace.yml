@@ -1,0 +1,37 @@
+name: Validate creator workspace
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full Git history and tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate workspace records
+        run: node scripts/validate-workspace.mjs
+      - name: Check project creation script
+        run: node --check scripts/create-project.mjs
+      - name: Check workspace validator
+        run: node --check scripts/validate-workspace.mjs
+      - name: Check Pages build script
+        run: bash -n scripts/build-pages.sh
+      - name: Check shared and starter files
+        run: |
+          test -s shared/design-tokens.css
+          test -s starter/static-site/index.html
+          test -s starter/static-site/styles.css
+          test -s starter/static-site/app.js

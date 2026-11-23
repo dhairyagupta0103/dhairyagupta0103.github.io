@@ -1,59 +1,45 @@
-# Contributing
+# Working in this repository
 
-This repository is maintained through small, task-driven pull requests. The requester should be able to describe desired changes in ordinary language; contributors and ChatGPT sessions handle the technical work.
+This is a single-user, GitHub-first creator workspace. The creator describes the outcome; ChatGPT handles implementation and GitHub operations where its connected tools permit.
 
-## Non-negotiable delivery rules
+## Choose a session mode
 
-1. Never push commits directly to `main`. Never use `main` as a working branch.
-2. Every change belongs to a task with a clear user outcome and acceptance criteria.
-3. Create or continue one task branch per coherent task. Keep revisions to that task in the same PR.
-4. Keep each PR focused on one task.
-5. Run relevant checks and report anything that could not be tested.
-6. Open a PR to `main` with a plain-language explanation, validation results, a sample-only preview and risks.
-7. Update `SESSION_LOG.md` in the same PR with actual work, PR status and next handoff.
-8. Do not merge a PR or bypass owner approval.
-9. Never place API keys, GitHub tokens, passwords or private user data in the repository.
+- Project mode: work on one project under projects/<id>/.
+- Maintenance mode: work on the platform, shared resources, templates, schemas, scripts, governance or workflows.
 
-## Task workflow
+The session chooses the mode from the request. Do not make the creator select a technical mode.
 
-### 1. Understand the request
+## Required workflow
 
-Translate the plain-language request into:
-- **Outcome:** what the user wants to achieve.
-- **Scope:** what will and will not change.
-- **Acceptance criteria:** observable conditions for completion.
-- **Constraints:** privacy, accessibility, compatibility and design requirements.
+1. Read CHATGPT_INSTRUCTIONS.md and governance/SESSION_PLAYBOOK.md.
+2. Inspect the latest main, open PRs and relevant branches.
+3. Continue a matching unfinished branch when possible.
+4. Otherwise create a task branch from the latest appropriate base.
+5. Make a focused change and run relevant checks.
+6. Update the project progress record or workspace handoff in the same branch.
+7. Keep experiments on their branch. Open a PR only when the work is complete.
+8. Never commit directly to main.
 
-Ask only for missing product decisions that materially affect the result. Routine technical choices belong to the contributor/agent.
+## Branch names
 
-### 2. Recover context
+- work/<project-id>/<task>
+- experiment/<project-id>/<task>
+- maintenance/<task>
 
-Read `CHATGPT_INSTRUCTIONS.md`, `CHATGPT_HANDOFF.md` and `SESSION_LOG.md`. Inspect the relevant files, current `main`, and open PRs. Do not assume an earlier proposal was approved.
+Use one branch for one coherent task. Keep iterating on it rather than creating a new branch for every small adjustment.
 
-### 3. Branch and implement
+## Project creation
 
-Create a task-specific branch from the latest `main`. Make the smallest complete change that meets the acceptance criteria. Keep site content separate from presentation where practical.
+Run the project creation script from a project branch:
 
-### 4. Validate
+~~~sh
+node scripts/create-project.mjs <slug> "<title>" "<summary>" <category>
+~~~
 
-Run relevant checks, including:
-- JavaScript syntax checks where applicable;
-- JSON/schema checks for structured content;
-- responsive and keyboard checks for UI changes;
-- privacy/security review for new content, assets or integrations.
-
-Add automated checks when a feature needs them.
-
-### 5. Deliver and hand off
-
-Open a PR using the repository template. Explain the result without jargon. Include screenshots or a preview URL for visual changes when available. Update `SESSION_LOG.md` in the same branch. If the PR is not merged, do not claim the change is live.
-
-## Intended experience
-
-The creator should not need to understand Git, branches, HTML, CSS or JavaScript. ChatGPT should handle those details and request only genuine product decisions or necessary permissions. A small experiment can be discarded or restarted; a preview is not publication approval. Keep iterating in the same PR until the creator confirms it is ready for owner review.
-
-This repository does not yet provide a secure, universal ChatGPT-to-GitHub automation service. A GitHub connector available in one ChatGPT account is not automatically available in another account. Any handoff must account for the nephew's own account and repository permissions. Never put credentials in browser code.
+The script creates the project folder from the template and updates the project catalogue.
 
 ## Definition of done
 
-A task is complete when its acceptance criteria are met, checks are reported, privacy/accessibility implications are reviewed, a PR is open with a useful explanation, and the session handoff is updated. A task is published only after the owner approves and merges its PR.
+A project change is ready for a PR when its requested outcome is implemented, relevant checks have been run, its progress/changelog records are accurate and the PR explains the result in ordinary language.
+
+A preview artifact is not a release. A release tag is created only after the completed project PR is merged. A portfolio selection points to an existing immutable release tag.

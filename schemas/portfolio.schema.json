@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Public portfolio selection",
+  "type": "object",
+  "required": ["schema_version", "projects"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["project_id", "version", "tag", "title", "summary", "category"],
+        "properties": {
+          "project_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "tag": { "type": "string" },
+          "title": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "featured": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

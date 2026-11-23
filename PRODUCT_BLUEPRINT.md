@@ -1,136 +1,63 @@
-# Product blueprint: creator-first AI project workspace
+# Product blueprint — single-user creator workspace
 
-**Status:** proposed MVP direction, not yet implemented as a complete product  
-**Initial audience:** young beginners and their responsible adults  
-**Initial AI:** ChatGPT  
-**Initial project source, version history and hosting:** GitHub + GitHub Pages  
-**Cost target:** use existing free tiers; no paid API, server, domain or hosting dependency
+Status: working MVP architecture  
+Audience: one creator using one ChatGPT account and one GitHub account  
+Cost target: GitHub and existing ChatGPT access; no paid API, server or database
 
 ## Product promise
 
-Help a creator move from an idea to a working, shareable project with an AI assistant, without needing to learn Git, deployment pipelines or web hosting first.
+The creator describes what they want to make in ChatGPT. ChatGPT builds and improves it. The workspace keeps the work organised, remembers its state through GitHub, and provides previews and a launcher for selected releases.
 
-The product is a project home and publishing workflow around AI creation. It does not try to replace ChatGPT or become a general-purpose AI coding model.
+This is not a second creation conversation and does not teach the creator how to use ChatGPT.
 
-## The first user journey
+## Everyday experience
 
-1. **Start an idea.** The creator chooses a simple project type and describes what they want to make.
-2. **Create a project home.** A guided flow creates a GitHub repository from a starter template. In the no-backend MVP, the repository owner performs the GitHub template step.
-3. **Build with ChatGPT.** The creator uses a project-specific instruction pack. If an authorised Codex workflow can edit the repository, it may do so. Otherwise ChatGPT produces a complete set of files and the creator/adult uploads them through GitHub's website.
-4. **Check the result.** GitHub Actions validates the files. The creator can use a local preview or a commit-pinned public static preview for supported projects. PR checks may also provide downloadable artifacts and screenshots.
-5. **Publish deliberately.** A responsible owner reviews the content and merges the approved change. GitHub Actions deploys the public static site to GitHub Pages.
-6. **Showcase it.** The creator adds the project's public URL and a short description to a portfolio manifest. The portfolio page displays only projects intentionally selected for public sharing.
+- Start a new ChatGPT session and describe a new idea, or ask to continue an existing project.
+- ChatGPT identifies the project, reads its GitHub records and resumes from the latest saved state.
+- The creator can ask for a preview, request changes, or decide that a finished version should be released.
+- The public workspace shows only project versions selected in the portfolio manifest.
 
-## What v1 includes
+There is one user and one repository in v1. No sign-up, multi-user roles, invitations, billing, backend or database.
 
-- A friendly project dashboard and project lifecycle: idea, experiment, building, ready to share, published, archived.
-- A small set of static-web project starters: personal project page, simple browser game, interactive learning page and creative showcase.
-- A project brief and ChatGPT prompt pack for each starter.
-- A GitHub repository template for each project.
-- GitHub Actions validation and GitHub Pages deployment.
-- A project manifest that powers a selected-work portfolio.
-- Clear preview, review and publish states.
-- Plain-language guidance so the creator does not need to understand Git internals.
+## Source of truth
 
-## Explicitly out of scope for v1
+GitHub is authoritative for project source, metadata, progress, branches, pull requests, version tags, portfolio selections, validation and deployment history.
 
-- User accounts, passwords or a platform database.
-- A hosted backend or a platform-owned GitHub token.
-- Automatic repository creation from a browser.
-- A universal ChatGPT write integration or an OpenAI API key.
-- Arbitrary server-side code execution, databases or long-running services.
-- Payments, advertising, social feeds, comments, direct messages or public rankings.
-- Private authenticated preview hosting.
-- A claim that every kind of project can be run or hosted.
+ChatGPT conversation context is temporary assistance. A session must inspect GitHub before resuming and save meaningful progress back to GitHub before ending.
 
-These exclusions keep the first release free-tier-first and avoid exposing GitHub credentials in browser code.
+## Single-repository structure
 
-## Architecture
+All projects live in projects/<project-id>/. Shared resources live in shared/. Reusable creator preferences live in creator/preferences.json. Project and portfolio records use JSON files with documented schemas.
 
-### 1. Creator-facing static workspace
+## Session modes
 
-The website is a static application hosted on GitHub Pages. It contains product guidance, project starter choices, a creator portfolio and a project manifest. It must not contain a GitHub personal access token, OAuth client secret, AI API key or other credential.
+A session decides internally whether the request is:
+- Project mode: create, resume, experiment on or complete one project.
+- Maintenance mode: improve the workspace, website, shared utilities, starter, schemas or GitHub workflows.
 
-### 2. GitHub as source of truth
+The creator does not need to choose a technical mode.
 
-Each publishable project lives in its own repository created from a public starter template. GitHub stores the files and history. The project repository contains:
-- the project source;
-- a short project brief;
-- a README with creator-friendly instructions;
-- a validation workflow;
-- a Pages deployment workflow.
+## Work lifecycle
 
-The portfolio repository stores only approved public project metadata and links. It must not copy private notes or private project files.
+- Ongoing and experimental work stays on a named branch.
+- Experiments can be previewed from a branch artifact and iterated without a pull request.
+- A pull request is opened when a coherent piece of work is complete and ready for main.
+- Main is the approved history and production website source.
+- No session commits directly to main.
+- A session does not merge unless the creator explicitly asks.
 
-### 3. ChatGPT as the first AI partner
+## Releases and portfolio
 
-The platform provides a structured project brief and reusable prompt instructions. The prompt tells ChatGPT to:
-- understand the requested outcome;
-- keep the first version small;
-- create or revise only project files;
-- explain what changed in plain language;
-- provide test and preview steps;
-- never publish without explicit approval.
+A meaningful completed milestone may receive a semantic version and immutable tag:
+project/<project-id>/v<major>.<minor>.<patch>.
 
-**Important integration boundary:** OpenAI's standard GitHub app is documented as read-only. OpenAI says direct code generation, editing and pushing is available through Codex. Therefore, v1 must not promise that every standard ChatGPT account can write to GitHub. Support an optional authorised Codex workflow where available, plus a manual file-upload fallback. Do not require a paid ChatGPT plan or OpenAI API usage for the MVP.
+The public portfolio is a simple manifest that points to exact project tags. It is read-only on the website: it launches selected versions and does not edit projects. A ChatGPT session can update the manifest when the creator asks to feature or replace a particular version. That change also goes through a pull request.
 
-A future MCP integration can expose narrowly scoped project tools, but it is not part of the no-cost first release. Its availability in ChatGPT varies by plan and workspace.
+## First-release limits
 
-### 4. Build, preview and publish
-
-- GitHub Actions runs syntax, structure and project-specific checks on pull requests.
-- A pull request can store test reports and downloadable preview artifacts.
-- A commit-pinned public static preview service may be used as a convenience for supported public HTML projects, but it is a third-party service, not a platform-owned hosting feature. Never use it for private content.
-- GitHub Pages publishes the approved version after merge to the default branch.
-- Production publication is separate from preview and requires an intentional owner action.
-
-GitHub Pages on GitHub Free is available for public repositories. This means the first free-tier hosting path is public by design. Do not put private drafts, credentials, personal records, school details, private images or other sensitive content in a public repository. A private GitHub repository is not a private GitHub Pages hosting solution on the Free plan.
-
-## Young creator safety and age boundaries
-
-- ChatGPT's Terms require users to be at least 13 (or the higher local minimum age); users under 18 need parent/guardian permission. OpenAI says ChatGPT is not meant for children under 13 and, in educational settings, an adult must conduct the actual interaction for under-13 children.
-- GitHub's Terms require users to be at least 13, and the local minimum age may be higher.
-- Never ask a child to enter a false birth date, bypass age restrictions or share an adult's login. Accounts belong to the adult or eligible user who controls them.
-- For under-13 participants, this GitHub + ChatGPT MVP is adult-operated: the adult owns the accounts and performs the AI and GitHub actions. Do not create a child login or share account credentials.
-- For ages 13–17, use requires the relevant parental permission and compliance with each service's terms.
-- Public pages must avoid identifying information such as full name, school, home address, phone number, routine schedule and precise location.
-- No public profiles, social feed, comments or messaging in v1.
-- Adult owner reviews every public release and checks permissions for images and other people's work.
-
-## Free-tier cost model and limitations
-
-Expected software spend for the first static-web MVP: ₹0, provided the owner uses eligible free accounts and stays within service limits.
-
-Costs and constraints:
-- GitHub Pages: public repositories on GitHub Free; static hosting only.
-- GitHub Actions: use public-repository workflows and modest CI. Usage limits and service terms can change.
-- ChatGPT: use the person's existing eligible ChatGPT access; no API key or paid API usage in v1.
-- Domain: use the supplied GitHub Pages URL; no custom domain purchase.
-- Preview: local preview, Actions artifacts, and optionally a third-party commit-pinned static preview. No dedicated paid preview host.
-
-This is not unlimited free compute. No arbitrary backend execution, large media hosting or high-traffic guarantee.
-
-## Success criteria
-
-A first-time creator, with adult help where required, can:
-1. choose a starter;
-2. create a project repository from its template;
-3. use the ChatGPT brief to make a small change;
-4. validate the project;
-5. see a preview;
-6. deliberately publish to GitHub Pages;
-7. add the published project to a portfolio.
-
-A friend should be able to repeat this using only the public instructions and free-tier services.
-
-## Later, only after validation
-
-1. Improve the project dashboard and guided onboarding.
-2. Add additional starter types.
-3. Add a hosted MCP service with narrowly scoped GitHub permissions only when there is a safe, affordable hosting and authentication plan.
-4. Add integrations for external hosting providers.
-5. Add multi-user collaboration and community features only after privacy, moderation, consent and support requirements are designed.
-
-## Decision
-
-Build the smallest reliable static-web workflow first. Treat ChatGPT as the creative partner, GitHub as the source of truth, GitHub Pages as public static hosting, and the portfolio as a curated index of approved projects. Do not build a platform backend until real creators have successfully repeated this workflow.
+- One GitHub repository and one user.
+- Static websites and browser projects only.
+- GitHub Actions checks and downloadable preview bundles.
+- GitHub Pages production hosting.
+- No private preview hosting or arbitrary backend execution.
+- No assumption that every ChatGPT surface has identical GitHub write or workflow-trigger permissions. The session uses only capabilities actually available and never claims an action succeeded unless GitHub confirms it.

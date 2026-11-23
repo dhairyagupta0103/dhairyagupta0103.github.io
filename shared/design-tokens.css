@@ -1,0 +1,12 @@
+:root {
+  --creator-ink: #242521;
+  --creator-paper: #f6f4ee;
+  --creator-muted: #77786f;
+  --creator-accent: #315b78;
+  --creator-radius: 1rem;
+  --creator-content-width: 70rem;
+  --creator-space-1: 0.5rem;
+  --creator-space-2: 1rem;
+  --creator-space-3: 1.5rem;
+  --creator-space-4: 2rem;
+}

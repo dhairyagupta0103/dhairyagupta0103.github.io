@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "id": "{{PROJECT_ID}}",
+  "title": "{{PROJECT_TITLE}}",
+  "summary": "{{PROJECT_SUMMARY}}",
+  "category": "{{PROJECT_CATEGORY}}",
+  "status": "building",
+  "current_version": "0.1.0",
+  "created_at": "{{CREATED_AT}}",
+  "updated_at": "{{CREATED_AT}}"
+}
