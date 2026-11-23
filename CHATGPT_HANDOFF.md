@@ -12,8 +12,8 @@ The creator only needs to describe what they want to make or continue. ChatGPT d
 - Default branch: main
 - Foundation PR: https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2
 - Working branch: recovery/all-assistant-changes-pr
-- Latest foundation commit: 8f1ba783a003e34b79d9330cf9a51825e24bcfe3
-- PR #2 is open and unmerged. Never commit directly to main.
+- PR #2 is open and unmerged. Always fetch the current branch head from GitHub; do not rely on a hard-coded commit SHA.
+- Never commit directly to main.
 
 ## Authoritative instructions
 
@@ -45,8 +45,8 @@ On the foundation branch:
 - Project scaffolding test passed in a temporary workspace.
 - Pages output build passed without publishing.
 - Branch preview artifact workflow passed.
-- Portfolio launcher browser tests passed on commit f62b1f6830f2b4934a221a1daa07e899b495366e.
-- The latest workflow run should be checked again after the most recent workflow-only change.
+- Portfolio launcher browser tests passed on the earlier implementation commit.
+- The latest workflow run should be checked again after the most recent workflow and documentation changes.
 
 ## Session modes
 

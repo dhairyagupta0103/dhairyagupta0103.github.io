@@ -23,8 +23,7 @@ GitHub is the authoritative record. This file is a short workspace-level handoff
 - Default branch: main
 - Foundation PR: #2
 - Working branch: recovery/all-assistant-changes-pr
-- Latest recorded commit: 8f1ba783a003e34b79d9330cf9a51825e24bcfe3
-- PR #2 remains open and unmerged.
+- PR #2 remains open and unmerged. Fetch the current head SHA from GitHub whenever resuming.
 
 ## Implemented core
 
@@ -36,8 +35,8 @@ The foundation PR now contains the single-repository folder structure, project m
 - Project folder creation test passed in a temporary workspace.
 - Pages output build passed without publishing.
 - Branch preview artifact workflow passed.
-- Portfolio launcher browser tests passed on commit f62b1f6830f2b4934a221a1daa07e899b495366e.
-- A workflow-only change subsequently restricted production deployment to pushes on main; verify the latest run results before merging.
+- Portfolio launcher browser tests passed on an earlier implementation commit.
+- Verify the latest Actions run results on the current PR head before merging.
 
 ## Next handoff
 
