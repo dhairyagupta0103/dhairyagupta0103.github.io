@@ -3,7 +3,6 @@ name: Publish workspace and selected project releases
 on:
   push:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: read
