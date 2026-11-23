@@ -1,36 +1,97 @@
-const CONTENT_URL = './content/site.json';
-const DEFAULT_CONTENT = {
-  meta:{brand:'NEXUS',eyebrow:"A DIGITAL SPACE FOR WHAT'S NEXT",kicker:'Ideas are only the beginning.',headline:'Make room|for possibility.',intro:'A flexible canvas for curiosity, experiments and things worth sharing. Always evolving. Never finished.',primaryLabel:'Explore the space',primaryHref:'#discover',secondaryLabel:'How it works',secondaryHref:'#about',collectionTitle:'Explore the unknown.',collectionIntro:'A few starting points. The next one could come from you.',signalTitle:'Stay curious.|Stay in motion.',aboutTitle:'A website that grows with its ideas.',aboutText:'NEXUS is a content-first digital canvas. Its visual identity can change, its content lives in one approachable file, and its future can be shaped with AI-assisted workflows.',footer:'An evolving digital canvas · Made to be remade.'},
-  features:[
-    {icon:'✳',title:'Ideas & imagination',description:'A home for concepts, questions and sparks that deserve room to grow.',tag:'THINK'},
-    {icon:'⌘',title:'Experiments',description:'Small prototypes, playful explorations and lessons discovered along the way.',tag:'MAKE'},
-    {icon:'◎',title:'Discoveries',description:'Useful things collected, connected and made easier to explore.',tag:'EXPLORE'}
-  ],
-  signals:[{label:'Curiosity over convention',value:'MINDSET / 01'},{label:'Clarity over complexity',value:'DESIGN / 02'},{label:'Progress over perfection',value:'MOTION / 03'}],
-  theme:'aurora'
-};
-let siteContent = structuredClone(DEFAULT_CONTENT);
+const DATA_URL = './content/site.sample.json';
 const $ = (selector, root=document) => root.querySelector(selector);
-const setText = (key,value) => {const node=$('[data-site="'+key+'"]');if(node)node.textContent=value;};
-function applyContent(data){
-  siteContent=data;
-  const m=data.meta||{};
-  Object.entries(m).forEach(([key,value])=>{if(typeof value==='string'&&['brand','eyebrow','kicker','intro','collectionTitle','collectionIntro','aboutTitle','aboutText','footer'].includes(key))setText(key,value);});
-  const headline=$('[data-site="headline"]');if(headline)headline.innerHTML=(m.headline||'').split('|').map((part,i)=>i?'<span class="gradient-text">'+escapeHTML(part)+'</span>':escapeHTML(part)).join('<br>');
-  const signalTitle=$('[data-site="signalTitle"]');if(signalTitle)signalTitle.innerHTML=(m.signalTitle||'').split('|').map((part,i)=>i?'<span class="gradient-text">'+escapeHTML(part)+'</span>':escapeHTML(part)).join('<br>');
-  document.querySelectorAll('[data-site-link]').forEach(a=>{const key=a.dataset.siteLink;a.textContent=(m[key+'Label']||'Explore')+' '+(key==='primary'?'↗':'↓');a.href=m[key+'Href']||'#';});
-  $('#feature-grid').innerHTML=(data.features||[]).map((item,i)=>'<article class="feature-card"><span class="feature-index">0'+(i+1)+' / '+escapeHTML(item.tag||'FEATURE')+'</span><span class="feature-arrow">↗</span><div class="feature-icon">'+escapeHTML(item.icon||'✳')+'</div><h3>'+escapeHTML(item.title||'Untitled')+'</h3><p>'+escapeHTML(item.description||'')+'</p></article>').join('');
-  $('#signal-list').innerHTML=(data.signals||[]).map(item=>'<div class="signal-row"><span>'+escapeHTML(item.label||'')+'</span><span>'+escapeHTML(item.value||'')+'</span></div>').join('');
-  if(data.theme) setTheme(data.theme);
+const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+let siteData = null;
+let activeFilter = 'all';
+
+function setSiteText(key, value) {
+  document.querySelectorAll('[data-site="'+key+'"]').forEach(node => { node.textContent = value; });
 }
-function escapeHTML(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function setTheme(theme){const allowed=['aurora','monolith','playground','terminal'];const safe=allowed.includes(theme)?theme:'aurora';document.body.dataset.theme=safe;$('#theme-select').value=safe;try{localStorage.setItem('nexus-theme',safe);}catch{}}
-async function loadContent(){try{const response=await fetch(CONTENT_URL,{cache:'no-store'});if(!response.ok)throw Error('Content file unavailable');const data=await response.json();applyContent(data);}catch(error){applyContent(DEFAULT_CONTENT);console.info('Using built-in starter content.',error);}}
-$('#theme-select').addEventListener('change',event=>setTheme(event.target.value));
-try{const saved=localStorage.getItem('nexus-theme');if(saved)setTheme(saved);}catch{}
-const studio=$('#studio');
-$('#studio-open').addEventListener('click',()=>studio.showModal());
-$('#export-content').addEventListener('click',()=>{const blob=new Blob([JSON.stringify(siteContent,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='site.json';a.click();URL.revokeObjectURL(url);$('#studio-status').textContent='Exported site.json. Commit it to content/site.json to publish your changes.';});
-$('#import-content').addEventListener('change',async event=>{const file=event.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!data.meta||!Array.isArray(data.features)||!Array.isArray(data.signals))throw Error('This does not look like a NEXUS content file.');siteContent=data;applyContent(data);$('#studio-status').textContent='Draft imported into this browser. Export it when ready to publish.';}catch(error){$('#studio-status').textContent='Could not import: '+error.message;}event.target.value='';});
-$('#copy-ai-prompt').addEventListener('click',async()=>{const prompt='You are helping maintain the NEXUS website. Edit only the content JSON, not HTML/CSS/JavaScript. Keep the site generic: never add personal data, birthdays, school details, private photos, addresses or identifying details. Preserve the schema keys meta, features, signals, theme. Return the complete valid JSON file and a short change summary. Current content:\n'+JSON.stringify(siteContent,null,2);try{await navigator.clipboard.writeText(prompt);$('#studio-status').textContent='AI update prompt copied. Paste it into a new or existing ChatGPT conversation.';}catch{$('#studio-status').textContent='Clipboard unavailable. Export the JSON and provide it to ChatGPT with the editing guide.';}});
-loadContent();
+function statusLabel(status) {
+  return ({experiment:'Experiment',building:'Building', 'in-progress':'In progress',showcase:'Featured',parked:'On the shelf'})[status] || 'In progress';
+}
+function projectCard(project, index) {
+  const bg = project.color || '#e9e5d9';
+  return `<article class="project-card" tabindex="0" role="button" data-project-id="${escapeHTML(project.id)}" aria-label="Open ${escapeHTML(project.title)} details">
+    <div class="card-top"><span class="project-type">${escapeHTML(project.kind || 'PROJECT')}</span><span class="project-status">${escapeHTML(statusLabel(project.status))}</span></div>
+    <div class="project-art" style="background:${escapeHTML(bg)}" aria-hidden="true">${escapeHTML(project.symbol || '✳')}</div>
+    <h3>${escapeHTML(project.title)}</h3><p>${escapeHTML(project.summary)}</p>
+    <div class="card-bottom"><span>${escapeHTML(project.updated || 'A new idea')}</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+  </article>`;
+}
+function renderProjects() {
+  const all = siteData.projects || [];
+  const filtered = all.filter(project => activeFilter === 'all' ||
+    (activeFilter === 'experiment' && project.status === 'experiment') ||
+    (activeFilter === 'building' && project.status === 'building') ||
+    (activeFilter === 'in-progress' && ['in-progress','building'].includes(project.status)));
+  $('#project-grid').innerHTML = filtered.map(projectCard).join('');
+  $('#empty-state').hidden = filtered.length > 0;
+  $('#count-all').textContent = String(all.length);
+  document.querySelectorAll('[data-filter]').forEach(button => {
+    const selected = button.dataset.filter === activeFilter;
+    button.classList.toggle('is-active', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+}
+function renderUpdates() {
+  $('#updates-list').innerHTML = (siteData.updates || []).map(update => `<article class="note-item">
+    <span class="note-date">${escapeHTML(update.date)}</span><div><h3>${escapeHTML(update.title)}</h3><p>${escapeHTML(update.text)}</p></div>
+  </article>`).join('');
+}
+function renderFeatured() {
+  const featured = (siteData.projects || []).filter(project => project.featured);
+  $('#featured-grid').innerHTML = featured.map(project => `<article class="showcase-card">
+    <span class="showcase-mark" aria-hidden="true">${escapeHTML(project.symbol || '✳')}</span>
+    <div><h3>${escapeHTML(project.title)}</h3><p>${escapeHTML(project.summary)}</p><a href="#workbench" data-open-project="${escapeHTML(project.id)}">TAKE A LOOK ↗</a></div>
+  </article>`).join('');
+}
+function openProject(id) {
+  const project = (siteData.projects || []).find(item => item.id === id);
+  if (!project) return;
+  $('#dialog-content').innerHTML = `<div class="dialog-visual" style="background:${escapeHTML(project.color || '#e9e5d9')}" aria-hidden="true">${escapeHTML(project.symbol || '✳')}</div>
+    <p class="dialog-meta">${escapeHTML(project.kind || 'PROJECT')} / ${escapeHTML(statusLabel(project.status))} / ${escapeHTML(project.updated || '')}</p>
+    <h2 id="dialog-title">${escapeHTML(project.title)}</h2><p class="dialog-description">${escapeHTML(project.description || project.summary)}</p>
+    <div class="dialog-note"><strong>What this is:</strong> ${escapeHTML(project.note || 'An idea that is allowed to grow one step at a time.')}</div>`;
+  $('#project-dialog').showModal();
+}
+function wireInteractions() {
+  document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
+    activeFilter = button.dataset.filter;
+    renderProjects();
+  }));
+  $('#project-grid').addEventListener('click', event => {
+    const card = event.target.closest('[data-project-id]');
+    if (card) openProject(card.dataset.projectId);
+  });
+  $('#project-grid').addEventListener('keydown', event => {
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('[data-project-id]')) {
+      event.preventDefault(); openProject(event.target.dataset.projectId);
+    }
+  });
+  $('#featured-grid').addEventListener('click', event => {
+    const link = event.target.closest('[data-open-project]');
+    if (link) { event.preventDefault(); openProject(link.dataset.openProject); }
+  });
+}
+async function init() {
+  try {
+    const response = await fetch(DATA_URL, {cache:'no-store'});
+    if (!response.ok) throw new Error('Sample content could not be loaded.');
+    siteData = await response.json();
+    if (!siteData.meta || !Array.isArray(siteData.projects) || !Array.isArray(siteData.updates)) {
+      throw new Error('The sample content has an unexpected format.');
+    }
+    setSiteText('name', siteData.meta.name || 'Little Big Lab');
+    setSiteText('eyebrow', siteData.meta.eyebrow || '');
+    setSiteText('kicker', siteData.meta.kicker || '');
+    setSiteText('intro', siteData.meta.intro || '');
+    setSiteText('footer', siteData.meta.footer || '');
+    document.title = (siteData.meta.name || 'Little Big Lab') + ' — Ideas in progress';
+    renderProjects(); renderUpdates(); renderFeatured(); wireInteractions();
+  } catch (error) {
+    $('#project-grid').innerHTML = '<p class="empty-state">The sample projects could not load. Please refresh the preview.</p>';
+    console.error(error);
+  }
+}
+init();
