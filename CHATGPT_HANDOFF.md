@@ -12,6 +12,7 @@ The creator only needs to describe what they want to make or continue. ChatGPT d
 - Default branch: main
 - Foundation PR: https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2
 - Working branch: recovery/all-assistant-changes-pr
+- Latest foundation commit: 8f1ba783a003e34b79d9330cf9a51825e24bcfe3
 - PR #2 is open and unmerged. Never commit directly to main.
 
 ## Authoritative instructions
@@ -20,12 +21,13 @@ Read README.md, CHATGPT_INSTRUCTIONS.md, governance/SESSION_PLAYBOOK.md, governa
 
 Then inspect GitHub branches, open PRs and the actual project files relevant to the request.
 
-## Core architecture
+## Implemented core
 
 - One repository; no separate repository per project.
 - projects/<id>/ stores each project's files, metadata, progress and changelog.
 - projects/_template/ stores reusable project records.
 - starter/static-site/ supplies the starter website files copied into a new project.
+- scripts/create-project.mjs creates a project folder and updates projects/index.json.
 - shared/ stores reusable code and styles.
 - creator/preferences.json stores only non-sensitive preferences.
 - projects/index.json is the project catalogue.
@@ -33,6 +35,18 @@ Then inspect GitHub branches, open PRs and the actual project files relevant to 
 - Git branches preserve experiments and unfinished work.
 - Pull requests represent completed units of work.
 - main is the approved history and production website source.
+- GitHub Actions validates workspace records, tests project scaffolding, packages branch preview artifacts and builds the Pages output.
+- The public launcher reads the portfolio manifest and links to the selected release.
+
+## Validation observed
+
+On the foundation branch:
+- Workspace validation passed.
+- Project scaffolding test passed in a temporary workspace.
+- Pages output build passed without publishing.
+- Branch preview artifact workflow passed.
+- Portfolio launcher browser tests passed on commit f62b1f6830f2b4934a221a1daa07e899b495366e.
+- The latest workflow run should be checked again after the most recent workflow-only change.
 
 ## Session modes
 
@@ -48,10 +62,10 @@ Use the GitHub capabilities actually available in the current ChatGPT session. S
 
 ## Next steps
 
-1. Validate project creation and workspace validation scripts.
-2. Verify the preview artifact workflow on a work/experiment branch.
-3. Configure GitHub Pages to publish through Actions once the deployment workflow is ready.
-4. Create one fictional sample project to test folder → branch → preview → PR → release tag → portfolio selection.
+1. Verify the latest validation, preview and browser test runs.
+2. Create one fictional project on an experiment branch and confirm the scaffold and preview bundle.
+3. Complete it through a PR, create its immutable tag after merge, and test selecting that tag in the portfolio manifest.
+4. Configure GitHub Pages to publish through Actions after the owner approves the foundation PR.
 5. Only then refine the creator-facing dashboard.
 
 ## Rules

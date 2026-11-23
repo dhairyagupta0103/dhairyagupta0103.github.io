@@ -23,14 +23,27 @@ GitHub is the authoritative record. This file is a short workspace-level handoff
 - Default branch: main
 - Foundation PR: #2
 - Working branch: recovery/all-assistant-changes-pr
+- Latest recorded commit: 8f1ba783a003e34b79d9330cf9a51825e24bcfe3
 - PR #2 remains open and unmerged.
+
+## Implemented core
+
+The foundation PR now contains the single-repository folder structure, project metadata/progress/changelog templates, project creation script, project/maintenance session playbook, version-tag and portfolio conventions, workspace validator, branch preview artifact workflow, Pages build/deployment workflow and a read-only portfolio launcher driven by portfolio/portfolio.json.
+
+## Validation recorded
+
+- Workspace validation passed.
+- Project folder creation test passed in a temporary workspace.
+- Pages output build passed without publishing.
+- Branch preview artifact workflow passed.
+- Portfolio launcher browser tests passed on commit f62b1f6830f2b4934a221a1daa07e899b495366e.
+- A workflow-only change subsequently restricted production deployment to pushes on main; verify the latest run results before merging.
 
 ## Next handoff
 
-1. Run workspace validation and browser tests.
-2. Confirm branch preview artifacts are produced.
-3. Verify the Pages deployment build with an empty portfolio manifest.
-4. Test one fictional project from creation through release and portfolio selection.
-5. Record actual workflow results here.
+1. Verify the latest Actions runs on the current PR head.
+2. Test one fictional project on an experiment branch and confirm it can be resumed from its branch records.
+3. Complete the project through a PR, create its immutable version tag after merge, and test portfolio selection.
+4. Configure Pages to use GitHub Actions only after the foundation PR is approved.
 
 Every session must inspect GitHub before resuming and update the relevant project's progress record on the same branch as its work. Never rely on this file or conversation history as a substitute for actual project files and GitHub history.
