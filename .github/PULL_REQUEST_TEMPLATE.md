@@ -1,25 +1,34 @@
-## User outcome
-What will a visitor or site maintainer be able to do after this change?
+## What can the creator try?
+Describe the result in ordinary language.
 
-## Task
-- Task / request:
-- Acceptance criteria:
+## Project stage
+- [ ] Quick experiment / POC
+- [ ] Ongoing project
+- [ ] Public work-in-progress
+- [ ] Portfolio candidate
+
+## Iteration
+- [ ] This PR can be revised in place
+- [ ] Preview reflects the latest PR commit
+- [ ] Creator has confirmed it is ready for promotion (required before merge)
 
 ## What changed
-- 
+-
 
 ## Validation
 - [ ] Automated checks pass
-- [ ] Manual checks completed where relevant
-- [ ] Responsive and keyboard behavior reviewed for UI changes
-- [ ] Privacy/security reviewed
+- [ ] Sample-only browser preview checked
+- [ ] Responsive and keyboard behaviour reviewed
+- [ ] Privacy and image choices reviewed
 - [ ] `SESSION_LOG.md` updated
 
 ## Preview
-Add preview URL and/or before/after screenshots for visual changes. If unavailable, say why.
+- Sample preview URL and exact commit:
+- Screenshot/test artifact:
+- If unavailable, explain why.
 
 ## Risks and follow-up
-Known limitations, migrations, decisions needed, or next focus.
+Known limitations or next steps.
 
 ## Release note
-Explain the change without technical jargon.
+Explain what changed without technical jargon. Do not describe it as published until owner approval, merge and deployment verification.
