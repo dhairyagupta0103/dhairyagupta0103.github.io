@@ -21,6 +21,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Test project folder creation
+        run: |
+          temp_dir="$(mktemp -d)"
+          cp -R projects starter portfolio creator "$temp_dir/"
+          (
+            cd "$temp_dir"
+            node "$GITHUB_WORKSPACE/scripts/create-project.mjs" sample-project "Sample Project" "Temporary validation fixture" learning
+            node "$GITHUB_WORKSPACE/scripts/validate-workspace.mjs"
+          )
       - name: Validate workspace records
         run: node scripts/validate-workspace.mjs
       - name: Check project creation script

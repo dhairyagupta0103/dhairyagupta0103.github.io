@@ -25,7 +25,9 @@ A session without a local repository execution tool can create the same files th
 
 ## Resuming
 
-Find the project in projects/index.json, then find its unfinished branch. Read the project records and inspect the source files from that branch. Continue the existing branch rather than recreating the project.
+A project that has not yet been merged may exist only on its work/ or experiment/ branch. Search matching branch names first. Read that branch's projects/index.json and project records, then continue the same branch.
+
+If no unfinished branch exists, find the project in projects/index.json on main and create a new work branch from main.
 
 ## Experiments and completed work
 
@@ -35,4 +37,4 @@ A preview artifact is produced from the branch. Keep iterating there. When the c
 
 ## Progress is not a transcript
 
-Keep PROGRESS.md concise. Record outcomes, current behaviour, open issues and the next step. Do not paste the conversation into the file. Git history and pull requests record the actual changes.
+Keep PROGRESS.md concise. Record outcomes, current behaviour, open issues and the next step. Update it at meaningful milestones and before ending a session. Do not paste the conversation into the file. Git history and pull requests record the actual changes.

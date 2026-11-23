@@ -24,7 +24,7 @@ Before resuming or changing work, inspect the current repository state. Do not a
 - Use work/<project-id>/<task> for ongoing work and experiment/<project-id>/<task> for exploratory work.
 - Read shared resources and creator preferences before implementing. Reuse existing utilities instead of copying or recreating them.
 - Keep changes inside the assigned project folder. If a shared utility needs improvement, make the smallest necessary change and treat it as maintenance unless the creator explicitly requested the shared change.
-- Update PROGRESS.md with current status, what is complete, what remains, known issues, the active branch and the next useful step.
+- Update PROGRESS.md at meaningful milestones and before ending, with current status, what is complete, what remains, known issues, the active branch and the next useful step.
 - Update CHANGELOG.md for meaningful completed changes. Do not invent completion or test results.
 - Keep experiments on their branch. Do not open a pull request until the work is coherent and ready for review.
 - When a completed unit is ready, open a pull request to main.
@@ -46,15 +46,17 @@ Keep maintenance work separate from an unrelated project feature. Run repository
 
 ## Resume protocol
 
-When asked to continue an existing project:
-1. Find the project in projects/index.json.
-2. Find its matching open work/experiment branch and pull request, if any.
-3. Read the project's progress file from that branch.
-4. Inspect the actual source files and compare them with the progress notes.
-5. Continue from the real files, not from a conversation summary.
-6. Save updated progress back to the same branch before ending.
+A project may exist only on an unfinished branch and therefore may not yet appear in the main-branch project catalogue.
 
-If no unfinished branch exists, continue from the current project on main.
+1. Identify the likely project ID from the creator's request.
+2. Search GitHub branches for matching work/<project-id>/ and experiment/<project-id>/ branches.
+3. If a matching branch exists, read projects/index.json, project.json, PROGRESS.md, CHANGELOG.md and source files from that branch.
+4. Inspect the actual files and compare them with the progress notes.
+5. Continue on that same branch; do not recreate the project.
+6. If no matching unfinished branch exists, look up the project in projects/index.json on main and continue from main using a new branch.
+7. Save updated progress back to the same branch before ending.
+
+For an existing open PR, continue its branch rather than creating a duplicate.
 
 ## Releases and portfolio
 

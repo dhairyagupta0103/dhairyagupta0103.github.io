@@ -19,7 +19,7 @@ At the start of every session:
 - read relevant project records and actual source files;
 - compare progress notes with the real code.
 
-Conversation memory is a convenience, not an authority.
+A new project may exist only on an unfinished branch and not yet be listed on main. Search matching branch names first and read the project catalogue from that branch. Conversation memory is a convenience, not an authority.
 
 ## Choose or continue a branch
 
@@ -41,7 +41,7 @@ Conversation memory is a convenience, not an authority.
 
 Before ending a project session, update its PROGRESS.md on the same branch with current state, what works, what remains, known issues, active branch and next suggested step.
 
-Update CHANGELOG.md for meaningful completed changes. Do not claim unrun tests passed.
+Update PROGRESS.md at meaningful milestones as well as at the end. Update CHANGELOG.md for meaningful completed changes. Do not claim unrun tests passed.
 
 For maintenance sessions, update SESSION_LOG.md with the actual outcome and next handoff.
 
