@@ -67,3 +67,11 @@ jobs:
           test -s starter/static-site/README.md
           test -s starter/static-site/.github/workflows/validate.yml
           test -s starter/static-site/.github/workflows/deploy-pages.yml
+      - name: Package static project starter
+        run: zip -r starter-template.zip starter/static-site
+      - name: Upload downloadable starter bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-project-starter
+          path: starter-template.zip
+          retention-days: 30
