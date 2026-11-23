@@ -55,3 +55,15 @@ jobs:
             playwright-report/
           if-no-files-found: ignore
           retention-days: 14
+      - name: Check starter JavaScript syntax
+        run: node --check starter/static-site/app.js
+      - name: Validate starter project metadata
+        run: |
+          node -e "const p=require('./starter/static-site/project.json'); for (const k of ['title','summary','category','status']) if (typeof p[k] !== 'string' || !p[k].trim()) throw new Error('Invalid starter field: '+k); console.log('Starter metadata is valid.');"
+      - name: Check starter deployment files
+        run: |
+          test -s starter/static-site/index.html
+          test -s starter/static-site/styles.css
+          test -s starter/static-site/README.md
+          test -s starter/static-site/.github/workflows/validate.yml
+          test -s starter/static-site/.github/workflows/deploy-pages.yml
