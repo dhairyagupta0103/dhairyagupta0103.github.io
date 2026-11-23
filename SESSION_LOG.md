@@ -77,3 +77,15 @@ The creator describes changes in ordinary language. ChatGPT sessions handle impl
 ## Session finish checklist
 
 Record actual changes, PR URL/state, tests actually run, preview URL/commit, remaining risks and the next handoff. Never claim the site is live unless the PR is merged and deployment is verified.
+
+
+## New product decision — free-tier creator-first MVP (2026-11-23)
+
+The owner chose a focused starter version for young creators, with ChatGPT as the first AI partner and GitHub as source control, hosting and publishing. The broader product may eventually serve any creator, but v1 stays narrow and free-tier-first.
+
+- Added `PRODUCT_BLUEPRINT.md` with the product promise, first user journey, architecture, explicit exclusions, age boundaries and free-tier limitations.
+- Added `MVP_IMPLEMENTATION_PLAN.md` with the staged implementation sequence and Release 1 acceptance checks.
+- Updated the ChatGPT handoff and session instructions to use this product direction.
+- Important platform constraints recorded: standard ChatGPT GitHub app is read-only; Codex may support direct repository writes where available; manual file upload is the fallback. GitHub Pages on GitHub Free is for public repositories, so private or identifying content must not be placed there. ChatGPT and GitHub require users to be at least 13 (or the higher local minimum); ChatGPT users under 18 need parental permission, and under-13 ChatGPT interactions must be adult-conducted.
+- No new product features, GitHub template repository, Pages deployment or ChatGPT integration have been implemented yet. PR #2 remains open and unmerged.
+- Next: implement one public static project template, its validation and Pages deployment workflows, then verify the full flow with fictional sample content.
