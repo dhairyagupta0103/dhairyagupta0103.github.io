@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "name": "Little Big Lab",
+    "eyebrow": "A SMALL SPACE FOR BIG CURIOSITY",
+    "kicker": "Make a little. Learn a lot.",
+    "intro": "A home for things being figured out: quick experiments, curious side quests, useful projects and the occasional finished thing.",
+    "footer": "Curiosity first. Perfection later."
+  },
+  "projects": [
+    {"id":"tiny-weather","title":"Tiny Weather Station","kind":"MAKER PROJECT","status":"building","summary":"A pocket-sized display that turns weather numbers into a friendly forecast.","description":"A small electronics and interface project exploring how a few sensors and a simple display can make weather easier to understand.","note":"The first version only needs to show temperature and a simple weather icon. Extra features can wait.","symbol":"☀","color":"#f7df8a","updated":"Updated this week","featured":true},
+    {"id":"pixel-garden","title":"Pixel Garden","kind":"CREATIVE CODE","status":"experiment","summary":"A tiny digital garden where each click grows a new pixel plant.","description":"A playful browser experiment about patterns, colour and tiny bits of generative art.","note":"A POC is allowed to be a little weird. Try a few growth rules and keep the one that feels fun.","symbol":"✿","color":"#c6dfbd","updated":"A weekend experiment","featured":true},
+    {"id":"story-machine","title":"The Story Machine","kind":"POC","status":"experiment","summary":"Mix a character, a place and a surprise to invent a new story prompt.","description":"A quick prototype that combines three random ingredients to help kick-start imaginative stories.","note":"This is a disposable prototype. It can be rebuilt from scratch whenever a better idea appears.","symbol":"✎","color":"#d8c8ee","updated":"Just started","featured":false},
+    {"id":"club-board","title":"Club Noticeboard","kind":"WEB TOOL","status":"in-progress","summary":"A simple board for sharing club plans, reminders and useful links.","description":"A small web app concept for organising a group activity. The public sample contains invented events and names only.","note":"Before using a real group, review privacy and get permission. This demo uses fictional information.","symbol":"▤","color":"#b9d3e8","updated":"A work in progress","featured":false},
+    {"id":"sound-shapes","title":"Sound Shapes","kind":"INTERACTIVE ART","status":"parked","summary":"An idea for turning simple sounds into colourful moving shapes.","description":"A concept saved for later. It is not currently being developed, and that is perfectly fine.","note":"Some ideas can wait on the shelf until they become interesting again.","symbol":"♫","color":"#f1c8b9","updated":"On the shelf","featured":false},
+    {"id":"space-notes","title":"Pocket Space Notes","kind":"LEARNING PROJECT","status":"building","summary":"A visual notebook for collecting discoveries about planets and stars.","description":"A learning project that organises space facts into short, illustrated cards.","note":"Keep sources attached to facts and make it easy to correct a card when something new is learned.","symbol":"✦","color":"#c7d1ef","updated":"Updated recently","featured":true}
+  ],
+  "updates": [
+    {"date":"NOTE / 06","title":"A project can pause without failing","text":"Sound Shapes is on the shelf for now. Parking an idea keeps the door open without making it another chore."},
+    {"date":"NOTE / 05","title":"The first version can be tiny","text":"The weather station started with one number on one screen. That was enough to make the next step obvious."},
+    {"date":"NOTE / 04","title":"Try the strange version","text":"Pixel Garden got more interesting when the plants were allowed to grow in unexpected patterns."}
+  ]
+}
