@@ -1,32 +1,28 @@
-# Task: <short outcome-oriented title>
+# Task: <idea or change>
 
-## User outcome
-Describe the change in plain language.
+## The idea
+Describe what you want to try or improve in your own words.
 
-## Scope
-### Included
-- 
+## What kind of work is this?
+The session decides the best fit: quick experiment / POC, ongoing project, public work-in-progress, or portfolio candidate. This can change as the idea grows.
 
-### Not included
-- 
+## Where should it live?
+The session decides: public repository, temporary task branch, or private/less-accessible storage. Keep sensitive information and secrets out of public Git history.
 
-## Acceptance criteria
-- [ ] Observable result 1
-- [ ] Observable result 2
-- [ ] Responsive/accessibility expectations considered
-- [ ] No personal or secret data introduced
+## What should the first version do?
+- [ ] A small, testable first step
+- [ ] A preview the creator can try
+- [ ] A clear way to keep, change, restart or discard it
 
-## Implementation notes
-Technical approach, affected areas and constraints. The requester should not need to specify HTML/CSS/JS implementation details.
+## Iteration
+- Keep revisions for this task in the same PR.
+- Refresh the preview after each update.
+- Do not publish merely because a preview exists.
+- Wait for the creator's readiness confirmation and owner approval.
 
-## Validation
+## Validation and handoff
 - [ ] Relevant automated checks pass
-- [ ] Manual review completed where needed
-- [ ] Preview checked (if visual)
-- [ ] Privacy/security implications reviewed
-
-## Delivery
-- Branch:
-- Pull request:
-- Session log updated:
-- Remaining work / next focus:
+- [ ] Sample-only browser preview checked
+- [ ] Privacy and image choices reviewed
+- [ ] `SESSION_LOG.md` updated
+- [ ] PR explains what to try in plain language
