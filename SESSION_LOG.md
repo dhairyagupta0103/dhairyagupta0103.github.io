@@ -89,3 +89,14 @@ The owner chose a focused starter version for young creators, with ChatGPT as th
 - Important platform constraints recorded: standard ChatGPT GitHub app is read-only; Codex may support direct repository writes where available; manual file upload is the fallback. GitHub Pages on GitHub Free is for public repositories, so private or identifying content must not be placed there. ChatGPT and GitHub require users to be at least 13 (or the higher local minimum); ChatGPT users under 18 need parental permission, and under-13 ChatGPT interactions must be adult-conducted.
 - No new product features, GitHub template repository, Pages deployment or ChatGPT integration have been implemented yet. PR #2 remains open and unmerged.
 - Next: implement one public static project template, its validation and Pages deployment workflows, then verify the full flow with fictional sample content.
+
+
+## First static project starter added (2026-11-23)
+
+- Added `starter/static-site/` as the first reusable project starter.
+- Included beginner instructions, a ChatGPT project prompt, public project metadata, a responsive static page, CSS and JavaScript.
+- Added a project-level GitHub Actions workflow for pull-request validation and a separate Pages deployment workflow that runs only on pushes to `main`.
+- Extended the root validation workflow to check the starter JavaScript, metadata and required files.
+- Removed manual `workflow_dispatch` from the starter deployment workflow so an arbitrary branch cannot be manually deployed to Pages.
+- This is a starter folder inside the existing repository, not yet a separate GitHub template repository. It has not yet been deployed independently.
+- Next: copy it into a separate fictional sample repository, configure Pages to use GitHub Actions, verify deployment, then connect it to the creator workspace UI.
