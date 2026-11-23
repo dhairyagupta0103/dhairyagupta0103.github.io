@@ -2,107 +2,104 @@
 
 ## Product goal
 
-Build a welcoming, low-friction place where a young creator can explore ideas and make projects of any size. It should support quick experiments and POCs, ongoing work, public work-in-progress updates and a curated portfolio. The portfolio is one part of the website, not the whole product.
+A welcoming place where a young creator can try ideas and make projects of any size. It supports quick experiments and POCs, ongoing projects, public work-in-progress, progress notes and a curated portfolio. The portfolio is one part of the site, not the whole product.
 
-The creator should be able to ask for changes in ordinary language. ChatGPT sessions handle implementation, tests, branches and PRs. The creator mainly needs to try the preview and say what feels right or what should change.
+The creator describes changes in ordinary language. ChatGPT sessions handle the technical work and Git workflow. The creator mainly tries previews and gives feedback.
 
-## A project can grow, pause, or disappear
+## Project lifecycle
 
-Use a lightweight lifecycle rather than forcing every idea into a formal process:
+1. **Try it:** start with the smallest useful prototype. No formal brief is needed.
+2. **Explore it:** iterate through multiple preview revisions on one PR.
+3. **Keep or discard:** continue, restart, park, archive or discard. A POC does not need to become permanent.
+4. **Share it:** publish only when the creator chooses, with an honest work-in-progress status.
+5. **Promote it:** feature it in the curated portfolio when it is ready and the creator wants that.
 
-1. **Try it:** start with the smallest useful prototype. It can be rough and temporary.
-2. **Explore it:** iterate quickly, including through multiple preview revisions on one PR.
-3. **Keep or discard:** keep useful work, archive it if its history matters, or close/discard it. A POC does not have to become a permanent repo project.
-4. **Share it:** if the creator chooses, publish it as an experiment or work-in-progress with an honest status.
-5. **Promote it:** when it is ready and the creator wants it featured, add it to the curated portfolio.
+Do not require a polished result before starting. A preview is not permission to publish.
 
-Do not require a polished brief, project plan or portfolio-ready result before starting. Do not confuse a preview with permission to publish.
+## Where artefacts live
 
-## Decide where each artefact belongs
+Sessions choose a sensible home for each task:
+- **Public repository:** reusable source and assets intentionally selected for public release.
+- **Temporary task branch/PR:** disposable prototypes and short-lived experiments.
+- **Private/less-accessible storage:** personal drafts, original photos, private notes, private datasets and other sensitive artefacts.
+- **AI-safe fixtures:** fictional content only for browser inspection, tests, screenshots and logs.
 
-A session should make a sensible storage decision for each task instead of putting everything in the public repository.
+Be careful with personal details and images without making ordinary creativity feel restricted. Selected personal assets can be published after intentional review. Keep secrets and highly sensitive information out of Git entirely: deleting a file later does not erase it from Git history.
 
-- **Public repository:** reusable source code, site components, public project pages and assets intentionally selected for public release.
-- **Temporary task branch/PR:** short-lived experiments and prototypes that are being reviewed. They can be discarded without changing the live site.
-- **Private or less-accessible storage:** personal drafts, private notes, original personal photos, high-resolution originals, private datasets, credentials and material that should not be visible in public Git history.
-- **AI-safe fixtures:** fictional sample content only, for tests, browser inspection, screenshots and logs.
+## Website structure
 
-Keep the default cautious when personal information is involved, but do not over-restrict normal creative work. A creator-selected image or project can be published after an intentional review. Preserve private originals where appropriate, use a reviewed public copy, consider image rights and other people's privacy, and remove location metadata from public copies where feasible.
+The first sample implementation uses one data-driven page with:
+- Workbench: projects and experiments with status filters and detail views.
+- Field Notes: short progress updates and discoveries.
+- Showcase: curated projects selected for promotion.
+- Start section: an invitation to begin with a small idea.
 
-A file deleted in a later commit may still exist in Git history. Therefore, never commit a secret or highly sensitive file on the assumption it can simply be deleted later.
+The fictional content is stored in `content/site.sample.json`. The page renderer is separate from that data. Future iterations can add individual project pages, richer demos, categories, tags, search, and real creator content after the privacy boundary is ready.
 
-## One renderer, multiple kinds of content
+## PR-first iteration
 
-The site should support more than a portfolio grid. Its content model should be able to represent:
-- a project or experiment with title, summary, status, date and links;
-- a project detail page or standalone interactive demo;
-- work-in-progress notes or release/update entries;
-- a discovery/projects area for public experiments;
-- a curated portfolio section for selected work;
-- profile/about information and optional contact links.
+Every coherent task is delivered through a PR. No direct commits to `main`.
 
-The renderer should use configuration/data rather than hard-coding the creator's personal details. Public repository fixtures should be obviously fictional and exercise all supported page types and layouts.
-
-## PR-first preview and iteration
-
-Every requested change should be delivered through a task PR. No direct commits to `main`.
-
-- Create one PR for a coherent task or project increment.
-- Build a preview from the PR's exact head commit.
+- Create one PR per task/project increment.
+- Build or update a preview from the exact PR head commit.
 - Show the creator the preview in plain language.
-- Accept feedback and push revisions to the same PR.
-- Refresh the preview after every new commit and make its commit identity visible.
+- Continue revisions in the same PR and refresh the preview after each commit.
 - Keep the PR open while the creator iterates.
-- When the creator confirms that it looks good and is ready for promotion, hand it to the owner for approval.
-- Do not merge, deploy or promote automatically.
+- Wait for the creator to confirm that it looks good and is ready for promotion.
+- The repository owner approves and merges. Do not merge or publish automatically.
 
-A creator may abandon a POC at any time. Close the PR or leave it clearly marked as abandoned; do not merge it to preserve it. If preserving the experiment is useful, retain the branch or archive it without changing the live site.
+A creator may abandon a POC at any time. Close/discard it without changing the live site.
 
-## Two views of each proposed change
-
-Both views should use the same application code and exact PR commit, but different data sources.
+## Preview modes
 
 ### A. AI-safe preview
 
-- Automatically built from the exact PR head commit.
-- Uses only fictional sample configuration and placeholder assets from the public repository.
-- Accessible to ChatGPT browser inspection and automated Playwright checks.
-- Tests navigation, project pages, responsive layouts, keyboard access, image loading and browser errors.
-- Screenshots, traces, logs and artifacts contain sample content only.
-- The PR shows the preview URL and exact commit SHA.
+- Uses only fictional sample content from the public repository.
+- ChatGPT browser inspection and automated Playwright checks use this version only.
+- Tests cover initial rendering, project filters, keyboard operation of detail views and mobile overflow.
+- Screenshots, traces, logs and artifacts contain sample data only.
+- The preview must identify the exact PR commit.
 
-### B. Personal review preview
+A commit-pinned raw static preview URL may be used for an initial review only after verifying that it renders and loads its relative assets/data correctly. This is a convenience preview, not a dedicated deployment system. GitHub Actions browser tests create sample-only screenshots and reports.
 
-- Uses the exact same application code/PR commit.
+### B. Personal review preview (future)
+
+- Uses the same application code and exact PR commit.
 - Loads selected real content from a separate private source.
-- Available only to the creator/owner through authentication.
-- Lets the creator check personal copy, selected images and the actual presentation before approving a change.
-- ChatGPT sessions and automated jobs never receive its URL, credentials, cookies, private configuration, response bodies or screenshots.
-- Generated only by a trusted, owner-authorized process. Do not expose private configuration/secrets to arbitrary PR build scripts that an unreviewed change can modify.
+- Accessible only to the creator/owner through authentication.
+- ChatGPT sessions and automated jobs never receive its URL, credentials, cookies, configuration, response bodies or screenshots.
+- Generated only through a trusted, owner-authorized process. Do not expose private configuration or secrets to arbitrary PR build scripts.
 
-A new commit must refresh both previews or clearly mark old previews as stale. The creator should not need to understand commit hashes; the session should explain which preview is current.
+This capability is not configured. Do not claim it exists until deployed and tested.
 
 ## Privacy boundary
 
-The AI-safe preview keeps personal data out of the AI inspection workflow. It does not make a public production website private. Anyone who can open a public page can see its rendered content, including AI-enabled browsers. Publish only details and images that the creator and owner intentionally choose to make public.
+The AI-safe preview prevents personal content from entering the AI inspection workflow. It does not make a public production website private. Anyone who can open a public page can see its rendered content. Publish only details and images intentionally selected for public release.
 
-If actual personal content must be inaccessible to unauthenticated visitors, protect the personal view with authentication and ensure there is no alternate unprotected Pages/default/custom domain route. A hidden URL or noindex directive is not access control.
+If actual personal content must be inaccessible to unauthenticated visitors, protect the personal view with authentication and ensure there is no alternate unprotected deployment domain. A hidden URL or noindex directive is not access control.
 
-Never put personal information, private images, passwords, tokens, private messages or private datasets into public PRs, Git history, test fixtures, browser traces, screenshots or build logs. Use a reviewed public copy of selected assets where appropriate. Avoid exposing identifying information such as school, home address, phone number, precise location or routine schedule.
+Avoid publishing identifying details such as school, home address, phone number, precise location or routine schedule. Review image rights and other people's privacy. Keep original personal media private where appropriate and use reviewed public copies.
 
 ## Hosting direction and current limits
 
-Evaluate a host that supports PR preview deployments and a separate authenticated personal preview. Cloudflare Pages + Access is a candidate; its preview Access setting does not automatically protect the default `*.pages.dev` domain or custom domains, so all alternate routes must be tested. Netlify Deploy Previews are another candidate. No provider, domain, private content source or authenticated preview is configured yet.
+A dedicated host that supports PR preview deployments is still needed for a robust, always-current preview. Cloudflare Pages + Access and Netlify are candidates, but no provider, domain, private content source or authenticated preview is configured. Cloudflare preview access settings require special care because default Pages domains and custom domains may remain accessible unless separately protected.
 
-Do not claim a preview exists until it has been deployed and tested. The architecture must also avoid handing private secrets to arbitrary PR workflows.
+## Current implementation status
+
+- Sample creative workspace implemented on PR #2.
+- Fictional sample config committed at `content/site.sample.json`.
+- Playwright checks and GitHub Actions workflow added.
+- The first browser preview must still be opened and verified at the current PR head.
+- Dedicated PR hosting and the authenticated personal preview remain future work.
+- There is no universal ChatGPT-to-GitHub automation service. The session instructions define the intended workflow, subject to the connected account's permissions.
 
 ## Acceptance criteria
 
-- A new idea can start as a small POC without a heavy setup process.
+- New ideas can start as small POCs without a heavy setup process.
 - The creator can iterate on one PR and see an updated preview after each change.
-- An abandoned experiment can be discarded without affecting the live site.
-- The website can show public projects/work-in-progress as well as a curated portfolio.
-- Sessions decide sensible storage locations and keep private material out of public Git history.
+- Abandoned experiments can be discarded without affecting the live site.
+- The website supports public projects/work-in-progress and a curated portfolio.
+- Sessions choose sensible storage and keep sensitive artefacts out of public Git history.
 - Public tests and AI inspection use fictional sample content only.
-- The creator can inspect a real-content preview through a separate authenticated route.
-- The creator explicitly confirms readiness before owner approval; no automatic merge or publication.
+- The creator can eventually inspect a real-content preview through a separate authenticated route.
+- The creator confirms readiness before owner approval; no automatic merge or publication.
