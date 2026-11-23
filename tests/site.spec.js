@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test('sample workspace loads and shows project areas', async ({ page }) => {
+test('sample workspace loads and shows project areas', async ({ page }, testInfo) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
@@ -11,6 +11,7 @@ test('sample workspace loads and shows project areas', async ({ page }) => {
   await expect(page.locator('.showcase-card')).toHaveCount(3);
   await expect(page.locator('.note-item')).toHaveCount(3);
   expect(errors).toEqual([]);
+  await page.screenshot({ path: testInfo.outputPath('sample-homepage.png'), fullPage: true });
 });
 
 test('project filters and project details work with keyboard', async ({ page }) => {
