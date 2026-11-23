@@ -1,0 +1,31 @@
+name: Validate project
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: node --check app.js
+      - name: Validate project details
+        run: |
+          node -e "const p=require('./project.json'); for (const k of ['title','summary','category','status']) if (typeof p[k] !== 'string' || !p[k].trim()) throw new Error('Invalid project.json field: '+k); console.log('Project details are valid.');"
+      - name: Check required files
+        run: |
+          test -s index.html
+          test -s styles.css
+          test -s app.js
