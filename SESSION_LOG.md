@@ -1,68 +1,79 @@
 # Project session history
 
-This file is the durable handoff between ChatGPT sessions. Update it in every task PR. Keep entries concise, factual and useful to the next session. Do not record personal or sensitive information.
+This is the durable handoff between ChatGPT sessions. Keep it factual, concise and free of personal or sensitive information.
 
-## The actual goal
+## Actual goal
 
-Create a welcoming, low-friction creative workspace for a young creator. It is not just a portfolio. They should be able to try ideas, build small or large projects, make disposable POCs, keep useful work, publish selected experiments, track progress and later promote suitable projects to a curated portfolio.
+A low-friction creative workspace for a young creator to try ideas, make small or large projects, build disposable POCs, keep useful work, share selected experiments, track progress and eventually promote suitable projects to a curated portfolio. The portfolio is one part of the site, not the whole site.
 
-The creator describes changes in ordinary language. ChatGPT sessions manage the technical work and Git workflow. The creator should be able to review a preview and give feedback without needing to understand branches, commits, HTML, CSS, JavaScript or PRs.
+The creator describes changes in ordinary language. ChatGPT sessions handle implementation, testing, branches, PRs and previews. The creator should mainly try the preview and give feedback.
 
-## Product principles
+## Product and workflow principles
 
-- Make it easy to start small; no formal planning required for a POC.
-- Let experiments grow, pause, be discarded/restarted, or become ongoing projects.
-- Support public work-in-progress and project updates as well as a curated portfolio.
-- Use one task PR as the iteration space: preview, feedback, revise, preview again.
-- A preview is not permission to publish. Creator confirms readiness; owner approves merge/promotion.
-- Sessions choose sensible storage: public repo for shareable source/assets, temporary branches for disposable work, private storage for sensitive/personal artefacts.
-- Be careful with personal details and images without making ordinary creativity feel restricted.
-- Keep advice age-appropriate and ask for adult/owner help for consequential privacy, security or safety decisions.
+- Make starting small easy. A rough first version is welcome.
+- Let projects grow, pause, restart, be discarded, or become ongoing projects.
+- Support experiments, public work-in-progress, updates and curated portfolio entries.
+- Use one PR per coherent task. Iterate in that same PR and refresh the preview after each commit.
+- A preview is not publication approval. The creator confirms readiness; the owner approves merge/promotion.
+- Sessions decide whether artefacts belong in the public repo, a temporary task branch or private/less-accessible storage.
+- Be careful with personal details and images without making ordinary creative work feel restrictive.
+- Keep all AI inspection, automated tests, screenshots and logs on fictional sample content only.
+- Never put credentials or highly sensitive information in Git history.
 
-The user did not request a product called NEXUS, a generic digital canvas, or a separate Control Center. Those were assistant-invented directions and are not agreed requirements.
+## Repository state
 
-## Current repository state
+- Default branch: `main`.
+- `main` was restored to the pre-assistant baseline commit `401781a`.
+- The assistant-authored work remains on [PR #2](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2), open and unmerged.
+- Recovery reference: `archive/pre-pr-main-2026-11-22`.
+- Current task branch: `recovery/all-assistant-changes-pr`.
+- PR #2 is a consolidated recovery/foundation PR. It must not be merged until its entire diff is reviewed; the earlier NEXUS design was assistant-invented and has now been replaced in the PR branch by the experiment-first creative workspace.
+- No private personal content is included in the sample project data.
 
-- **Default branch:** `main`.
-- **Current `main` baseline:** restored to commit `401781a`, immediately before assistant-authored redesign work. This is the earlier site version; review privacy implications before treating it as the final published state.
-- **Assistant-authored work:** held on [PR #2](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2), not merged.
-- **Safety copy of previous main tip:** branch `archive/pre-pr-main-2026-11-22`.
-- **Proposed site files on PR #2:** `index.html`, `assets/styles.css`, `assets/app.js`, `content/site.json`, and `EDITING.md`.
-- **Workflow files on PR #2:** `CONTRIBUTING.md`, `TASK_TEMPLATE.md`, `.github/PULL_REQUEST_TEMPLATE.md`, and `.github/workflows/validate.yml`.
-- **AI integration status:** there is no working ChatGPT-to-GitHub automation service in this repository. The current Content Studio is only a local browser import/export tool. It does not connect to ChatGPT or write to GitHub.
-- **Preview status:** no PR preview hosting or browser-inspection pipeline is configured yet. See `PREVIEW_ARCHITECTURE.md` for the intended AI-safe and personal-review previews.
-- **Important account limitation:** a GitHub connection available in one ChatGPT account/session is not automatically available to another account.
+## Current implementation on PR #2
 
-## Non-negotiable delivery rules
+- Replaced the generic NEXUS landing page with **Little Big Lab**, a sample creative workspace.
+- Added Workbench project cards, status filters, keyboard-openable project detail dialogs, Field Notes updates, a curated Showcase and a low-pressure “start with an idea” section.
+- Added fictional project examples covering a maker project, creative coding experiment, POC, web tool, parked idea and learning project.
+- The page loads `content/site.sample.json`; the sample content is fictional and intended for browser/AI inspection.
+- Added Playwright browser checks for rendering, filtering, keyboard interaction and mobile overflow.
+- Updated GitHub Actions to validate sample JSON, run browser tests and save sample-only screenshot/test artifacts.
+- Rewrote the editing guide and task template for ordinary-language, same-PR iteration.
+- The former unused `content/site.json` NEXUS content should be removed as cleanup if not already removed.
+- A hosted PR preview is not guaranteed yet. The candidate static preview URL is a commit-pinned raw.githack URL; verify it actually renders before sharing it as a working preview.
+- No private content store, authenticated personal preview, or automatic private preview is configured.
+
+## Safety and publication boundaries
 
 - Never push assistant changes directly to `main`.
-- Every coherent task is scoped, implemented on a task branch, validated and delivered through a PR to `main`.
-- Keep iterating on the same PR for revisions to the same task; refresh its preview after every commit.
-- Do not merge until the creator explicitly confirms the preview looks good and is ready for promotion, and the repository owner approves.
-- Abandoned POCs may be closed/discarded; do not merge them just to preserve their work.
-- Update this file in the same task PR with actual changes, PR/status, tests, risks and next handoff.
-- Make routine technical decisions autonomously; ask only for genuine product choices, required permission or consequential privacy/safety decisions.
-- Never expose credentials, tokens or private data in browser code, repository files, logs, screenshots or test artefacts.
+- Keep each coherent task in one PR and update its preview as the PR changes.
+- Do not merge until the creator says the preview looks good and is ready for promotion, and the repository owner approves.
+- Abandoned POCs may be discarded without changing the live site.
+- Use fictional sample content for AI/browser inspection, test traces, screenshots and logs.
+- Keep personal drafts, originals, credentials, private datasets and sensitive details outside public Git history.
+- A public website is visible to anyone. Selected personal details or images must be intentionally reviewed before publication.
+- Do not expose a private preview URL, credentials, cookies or content to ChatGPT or automated jobs.
+- Keep guidance age-appropriate and ask for adult/owner help for consequential privacy, account-security or safety decisions.
 
-## Next focus
+## Next handoff
 
-1. Replace the generic NEXUS direction with the actual creative-workspace model: projects, experiments/POCs, work-in-progress updates and a curated portfolio.
-2. Design a lightweight project data model and fictional sample content in the public repository.
-3. Build an AI-safe PR preview and browser checks using sample data only.
-4. Define the creator-facing PR preview/feedback loop so the same PR can be revised repeatedly without Git complexity.
-5. Configure a separate authenticated personal preview using a trusted process that does not expose private content to PR scripts or AI checks.
-6. Add simple keep/discard/archive/promote paths that do not publish without explicit confirmation and owner approval.
+1. Verify the commit-pinned sample preview URL and inspect the rendered page; fix any issues in this same PR.
+2. Confirm GitHub Actions browser tests pass and review the screenshot artifact.
+3. Remove unused NEXUS content/assets and update any remaining stale docs/templates.
+4. Decide on a real PR preview host (Cloudflare Pages, Netlify or equivalent) if raw static preview is not reliable enough.
+5. Later implement the separate authenticated personal preview through a trusted process, without passing private data to PR scripts or AI.
+6. After the creator approves the preview and the owner approves, merge only the reviewed changes.
 
 ## Session entries
 
 | Session / task | Date (UTC) | Delivered | PR / status | Next handoff |
 |---|---|---|---|---|
-| Assistant-authored website redesign | 2026-11-22 | Created a generic NEXUS-branded website, themes, content JSON and local import/export studio; removed personal image files from the current tree. This was not the requested end product and was initially committed directly to `main`. | Included in [PR #2](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2); open, not merged. | Replace the invented generic canvas with the requested creative workspace. |
-| PR workflow and session handoff | 2026-11-22 | Added PR-first contribution rules, task template, session log, PR template and basic CI validation. | Included in [PR #2](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2); open, not merged. PR #1 was closed as superseded. | Preserve owner approval and make session handoff usable. |
-| History cleanup | 2026-11-22 | Restored `main` to the pre-assistant baseline and preserved the former main tip on `archive/pre-pr-main-2026-11-22`. | PR #2 contains the assistant-authored commit history; open, not merged. | Review deployment/privacy implications and PR contents before approval. |
-| Dual-preview requirements | 2026-11-23 | Recorded the requirement for fictional sample data in AI/browser inspection and a separate authenticated real-content preview from the same PR commit. | Documented on [PR #2](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2); open, not merged. | Implement and test both preview paths. |
-| Creative workspace clarification | 2026-11-23 | Clarified that the site supports a broad project journey: quick POCs, experiments, ongoing projects, public work-in-progress, progress tracking and later portfolio promotion. Added same-PR iteration, discard/restart, flexible artefact storage and age-appropriate privacy/safety principles to the session guidance. | Documented on [PR #2](https://github.com/dhairyagupta0103/dhairyagupta0103.github.io/pull/2); open, not merged. | Implement a lightweight project model and sample-driven experience before choosing hosting details. |
+| Assistant-authored website redesign | 2026-11-22 | Earlier generic NEXUS site was not the requested direction and was initially committed directly to main. | Consolidated into PR #2; open, unmerged. | Replace with creator-led project workspace. |
+| PR workflow and handoff | 2026-11-22 | Added PR-first rules, session history, task template and handoff documentation. | PR #2; open, unmerged. | Make sessions manage the technical workflow. |
+| History cleanup | 2026-11-22 | Restored main to pre-assistant baseline and retained a recovery branch. | PR #2; open, unmerged. | Review complete diff before approval. |
+| Creative workspace clarification | 2026-11-23 | Captured experiment-first product direction, same-PR iteration, discard/restart, flexible artefact storage and sensible personal-image care. | PR #2; open, unmerged. | Implement a working sample experience. |
+| First creative workspace implementation | 2026-11-23 | Replaced NEXUS homepage in the PR branch with a sample-driven project workspace; added sample projects, updates, project filters/details, Playwright checks and GitHub Actions browser validation. | PR #2; open, unmerged. Preview and workflow still need verification. | Verify the preview and browser checks, then fix any issues in this PR. |
 
-## How every session must finish
+## Session finish checklist
 
-Add a row recording actual work, PR URL and current state, tests performed, unresolved decisions/risks and the next useful task. Never say a change is live unless its PR has been merged and deployment verified.
+Record actual changes, PR URL/state, tests actually run, preview URL/commit, remaining risks and the next handoff. Never claim the site is live unless the PR is merged and deployment is verified.
