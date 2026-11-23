@@ -29,9 +29,19 @@ jobs:
         run: node --check scripts/validate-workspace.mjs
       - name: Check Pages build script
         run: bash -n scripts/build-pages.sh
+      - name: Build Pages output without publishing
+        run: bash scripts/build-pages.sh
+      - name: Save built workspace preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace-pages-preview-${{ github.sha }}
+          path: _site
+          retention-days: 14
       - name: Check shared and starter files
         run: |
           test -s shared/design-tokens.css
           test -s starter/static-site/index.html
           test -s starter/static-site/styles.css
           test -s starter/static-site/app.js
+          test -s projects/_template/project.json
+          test -s portfolio/portfolio.json

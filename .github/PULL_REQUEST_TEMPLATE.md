@@ -1,34 +1,25 @@
-## What can the creator try?
+## What is complete?
+
 Describe the result in ordinary language.
 
-## Project stage
-- [ ] Quick experiment / POC
-- [ ] Ongoing project
-- [ ] Public work-in-progress
-- [ ] Portfolio candidate
+## Work type
+- [ ] Project work
+- [ ] Workspace maintenance
+- [ ] Portfolio selection update
 
-## Iteration
-- [ ] This PR can be revised in place
-- [ ] Preview reflects the latest PR commit
-- [ ] Creator has confirmed it is ready for promotion (required before merge)
-
-## What changed
+## What changed?
 -
 
 ## Validation
-- [ ] Automated checks pass
-- [ ] Sample-only browser preview checked
-- [ ] Responsive and keyboard behaviour reviewed
-- [ ] Privacy and image choices reviewed
-- [ ] `SESSION_LOG.md` updated
+- [ ] Workspace validation passes
+- [ ] Relevant project checks pass
+- [ ] Preview artifact checked when applicable
+- [ ] Project progress or workspace handoff updated
 
 ## Preview
-- Sample preview URL and exact commit:
-- Screenshot/test artifact:
-- If unavailable, explain why.
+Link the branch preview artifact or explain what could not be previewed.
 
 ## Risks and follow-up
-Known limitations or next steps.
+List only real limitations or next steps.
 
-## Release note
-Explain what changed without technical jargon. Do not describe it as published until owner approval, merge and deployment verification.
+A pull request represents a completed unit of work. Experiments should remain on their branches until they are ready.

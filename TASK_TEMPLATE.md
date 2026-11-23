@@ -1,28 +1,23 @@
-# Task: <idea or change>
+# Internal task record
 
-## The idea
-Describe what you want to try or improve in your own words.
+## Outcome
+Describe the creator's requested result in plain language.
 
-## What kind of work is this?
-The session decides the best fit: quick experiment / POC, ongoing project, public work-in-progress, or portfolio candidate. This can change as the idea grows.
+## Session mode
+The session decides: project or maintenance.
 
-## Where should it live?
-The session decides: public repository, temporary task branch, or private/less-accessible storage. Keep sensitive information and secrets out of public Git history.
+## Project
+Project ID, or "workspace" for maintenance.
 
-## What should the first version do?
-- [ ] A small, testable first step
-- [ ] A preview the creator can try
-- [ ] A clear way to keep, change, restart or discard it
+## Branch
+Continue the matching active branch or create a work/, experiment/ or maintenance/ branch from the latest appropriate main.
 
-## Iteration
-- Keep revisions for this task in the same PR.
-- Refresh the preview after each update.
-- Do not publish merely because a preview exists.
-- Wait for the creator's readiness confirmation and owner approval.
+## Completion checks
+- [ ] Requested result implemented
+- [ ] Relevant checks run and reported honestly
+- [ ] Project PROGRESS.md updated, or SESSION_LOG.md updated for maintenance
+- [ ] Preview bundle available when relevant
+- [ ] Pull request opened only when the work is complete
 
-## Validation and handoff
-- [ ] Relevant automated checks pass
-- [ ] Sample-only browser preview checked
-- [ ] Privacy and image choices reviewed
-- [ ] `SESSION_LOG.md` updated
-- [ ] PR explains what to try in plain language
+## Handoff
+Record the next useful step in GitHub. Do not use this task record as a substitute for project progress or Git history.
