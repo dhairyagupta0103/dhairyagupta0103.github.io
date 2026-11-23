@@ -103,3 +103,15 @@ A dedicated host that supports PR preview deployments is still needed for a robu
 - Public tests and AI inspection use fictional sample content only.
 - The creator can eventually inspect a real-content preview through a separate authenticated route.
 - The creator confirms readiness before owner approval; no automatic merge or publication.
+
+
+## Agreed free-tier MVP direction (2026-11-23)
+
+The longer-term product is a creator-first AI project workspace. The first release uses ChatGPT as the AI partner, GitHub as source/version history, GitHub Actions for checks, and GitHub Pages for public static hosting. See `PRODUCT_BLUEPRINT.md` and `MVP_IMPLEMENTATION_PLAN.md` for the authoritative scope.
+
+Important constraints:
+- GitHub Pages on GitHub Free is available for public repositories; public project files and deployed content are public. Do not store private drafts, secrets, identifying details or personal data in these repositories.
+- Standard ChatGPT GitHub app access is read-only. Use an eligible Codex workflow for direct edits where available, or provide a manual file-upload fallback. A custom MCP server is not required for v1.
+- Pull-request artifacts and optional commit-pinned static previews are review aids, not private hosting. Publish only from the approved default branch after owner approval.
+- No platform backend, database, automatic repository creation, arbitrary code execution or authenticated private preview is part of v1.
+- ChatGPT and GitHub require users to be at least 13 (or a higher local minimum); ChatGPT users under 18 need parent/guardian permission. For under-13 children, an adult must conduct the actual ChatGPT interaction and manage accounts.
