@@ -6,10 +6,10 @@ This repository is maintained through small, task-driven pull requests. The requ
 
 1. Never push commits directly to `main`. Never use `main` as a working branch.
 2. Every change belongs to a task with a clear user outcome and acceptance criteria.
-3. Create one short-lived branch per task, based on the latest `main`.
+3. Create or continue one task branch per coherent task. Keep revisions to that task in the same PR.
 4. Keep each PR focused on one task.
 5. Run relevant checks and report anything that could not be tested.
-6. Open a PR to `main` with a plain-language explanation, validation results, preview information and risks.
+6. Open a PR to `main` with a plain-language explanation, validation results, a sample-only preview and risks.
 7. Update `SESSION_LOG.md` in the same PR with actual work, PR status and next handoff.
 8. Do not merge a PR or bypass owner approval.
 9. Never place API keys, GitHub tokens, passwords or private user data in the repository.
@@ -50,7 +50,7 @@ Open a PR using the repository template. Explain the result without jargon. Incl
 
 ## Intended experience
 
-The requester should not need to understand Git, branches, HTML, CSS or JavaScript. ChatGPT should handle those details and request only genuine product decisions or necessary permissions.
+The creator should not need to understand Git, branches, HTML, CSS or JavaScript. ChatGPT should handle those details and request only genuine product decisions or necessary permissions. A small experiment can be discarded or restarted; a preview is not publication approval. Keep iterating in the same PR until the creator confirms it is ready for owner review.
 
 This repository does not yet provide a secure, universal ChatGPT-to-GitHub automation service. A GitHub connector available in one ChatGPT account is not automatically available in another account. Any handoff must account for the nephew's own account and repository permissions. Never put credentials in browser code.
 
